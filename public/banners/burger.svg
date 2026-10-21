@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 110" fill="none" viewBox="0 0 120 110" fill="none"  >
+      <defs>
+        <filter id="b-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.45" />
+        </filter>
+        <radialGradient id="b-bun-grad" cx="50%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#f59e0b" />
+          <stop offset="70%" stop-color="#d97706" />
+          <stop offset="100%" stop-color="#92400e" />
+        </radialGradient>
+      </defs>
+      <g filter="url(#b-shadow)">
+        <path d="M25 48C25 24 40 14 60 14C80 14 95 24 95 48H25Z" fill="url(#b-bun-grad)" />
+        <ellipse cx="45" cy="26" rx="1.8" ry="1" fill="#fef3c7" transform="rotate(-15 45 26)" />
+        <ellipse cx="60" cy="22" rx="1.8" ry="1" fill="#fef3c7" />
+        <ellipse cx="75" cy="28" rx="1.8" ry="1" fill="#fef3c7" transform="rotate(20 75 28)" />
+        <ellipse cx="52" cy="34" rx="1.8" ry="1" fill="#fef3c7" />
+        <ellipse cx="68" cy="36" rx="1.8" ry="1" fill="#fef3c7" transform="rotate(-10 68 36)" />
+        {/* Bacon */}
+        <path d="M22 51C35 55 48 48 60 53C72 58 84 51 98 53" stroke="#991b1b" stroke-width="4" stroke-linecap="round" />
+        {/* Cheddar Melt */}
+        <path d="M20 54C30 60 42 55 52 61C65 54 75 60 100 56" fill="#f59e0b" />
+        {/* Angus Patty */}
+        <rect x="20" y="58" width="80" height="11" rx="5.5" fill="#381907" />
+        <path d="M30 60L35 66 M50 60L55 66 M70 60L75 66 M85 60L90 66" stroke="#1f0d04" stroke-width="2" stroke-linecap="round" />
+        {/* Lettuce */}
+        <path d="M18 73Q38 79 60 73Q82 79 102 73" stroke="#16a34a" stroke-width="5" stroke-linecap="round" />
+        {/* Bottom Bun */}
+        <path d="M25 76C25 82 40 85 60 85C80 85 95 82 95 76H25Z" fill="#b45309" />
+      </g>
+    </svg>

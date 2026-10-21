@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sparkles, AlertCircle, MessageSquare, Phone, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
 import { SHOP_INFO } from '../config';
+import PageBanner from '../components/banner/PageBanner';
 
 export default function CateringPage() {
   const [eventDate, setEventDate] = useState('');
@@ -68,26 +69,21 @@ export default function CateringPage() {
   return (
     <div className="pt-24 min-h-screen">
       {/* 1. HEADER BANNER [DARK SECTION] */}
-      <div className="py-16 px-4 sm:px-6 text-center border-b border-cream/10 bg-charcoal text-cream relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-burnt/20 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-widest font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-orange-burnt" />
-            <span>Family & Corporate Celebrations</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-cream mb-4">
-            Party & Event Catering
-          </h1>
-          <p className="text-cream/70 text-sm sm:text-base max-w-xl mx-auto">
-            From birthdays and sporting club presentations to backyard family feasts.
-            Generous trays of roasts, fresh salads, and hot party finger food.
-          </p>
-
-          <div className="inline-flex items-center gap-2 mt-6 text-xs text-amber-300 bg-amber-950/60 px-4 py-2 rounded-full border border-amber-500/30">
-            <AlertCircle className="w-4 h-4 text-amber-400" />
+      <PageBanner
+        variant="catering"
+        badgeIcon={Sparkles}
+        badgeText="Family & Corporate Celebrations"
+        title="Party & Event Catering"
+        subtitle="From birthdays and sporting club presentations to backyard family feasts. Generous trays of roasts, fresh salads, and hot party finger food."
+        className="py-16 px-4 sm:px-6 text-center"
+      >
+        <div className="flex justify-center mt-6">
+          <div className="inline-flex items-center gap-2 text-xs text-amber-300 bg-amber-950/60 px-4 py-2 rounded-full border border-amber-500/30 animate-[pulse_3s_ease-in-out_infinite] shadow-[0_0_12px_rgba(245,158,11,0.2)]">
+            <AlertCircle className="w-4 h-4 text-amber-400 flex-shrink-0" />
             <span><strong>Notice:</strong> All catering orders require a minimum of <strong>4 days advance notification</strong>.</span>
           </div>
         </div>
-      </div>
+      </PageBanner>
 
       {/* 2. MAIN INTERACTIVE CATERING CALCULATOR FORM [LIGHT SECTION] */}
       <div className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-b border-charcoal/10">

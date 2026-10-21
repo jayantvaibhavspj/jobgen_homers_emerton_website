@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 90" fill="none" viewBox="0 0 130 90" fill="none"  >
+      <defs>
+        <filter id="tray-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.4" />
+        </filter>
+      </defs>
+      <g filter="url(#tray-shadow)">
+        <ellipse cx="65" cy="74" rx="55" ry="10" fill="#000" opacity="0.3" />
+        {/* Foil Deep Tray Basin */}
+        <path d="M15 45L22 75H108L115 45H15Z" fill="#78716c" stroke="#d6d3d1" stroke-width="2" />
+        {/* Foil Rim Lip */}
+        <rect x="12" y="42" width="106" height="6" rx="3" fill="#a8a29e" stroke="#f5f5f4" stroke-width="1" />
+        {/* Sliced Roast Meats with Rich Gravy inside */}
+        <ellipse cx="65" cy="50" rx="38" ry="8" fill="#451a03" />
+        <ellipse cx="45" cy="49" rx="14" ry="5" fill="#78350f" />
+        <ellipse cx="65" cy="51" rx="15" ry="5.5" fill="#92400e" />
+        <ellipse cx="85" cy="49" rx="14" ry="5" fill="#78350f" />
+      </g>
+    </svg>

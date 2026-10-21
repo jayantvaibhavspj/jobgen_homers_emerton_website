@@ -3,25 +3,20 @@ import BurgerBuilder from '../components/BurgerBuilder';
 import { Flame, Sparkles, ArrowRight, Utensils } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import PageBanner from '../components/banner/PageBanner';
+
 export default function BurgerBuilderPage({ onAddToCart }) {
   return (
     <div className="pt-24 min-h-screen">
       {/* 1. HEADER BANNER [DARK SECTION] */}
-      <div className="py-14 px-4 sm:px-6 text-center border-b border-cream/10 bg-charcoal text-cream relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-burnt/20 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-widest font-semibold mb-3">
-            <Flame className="w-3.5 h-3.5 text-orange-burnt" />
-            <span>Interactive Custom Craft</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-cream mb-4">
-            The Burger Builder
-          </h1>
-          <p className="text-cream/70 text-sm sm:text-base max-w-xl mx-auto">
-            Design your ultimate stack! As you scroll, fresh Angus patties, smoky bacon rashers, and melted cheeses
-            drop onto your brioche bun with realistic physics.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        variant="builder"
+        badgeIcon={Flame}
+        badgeText="Interactive Custom Craft"
+        title="The Burger Builder"
+        subtitle="Design your ultimate stack! As you scroll, fresh Angus patties, smoky bacon rashers, and melted cheeses drop onto your brioche bun with realistic physics."
+        className="py-14 px-4 sm:px-6 text-center"
+      />
 
       {/* 2. MAIN INTERACTIVE BUILDER WORKSPACE [LIGHT SECTION] */}
       <BurgerBuilder theme="light" onAddToCart={onAddToCart} />

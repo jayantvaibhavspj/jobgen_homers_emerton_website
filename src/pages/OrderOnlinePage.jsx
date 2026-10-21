@@ -4,25 +4,20 @@ import { Link } from 'react-router-dom';
 import HowToOrder from '../components/HowToOrder';
 import { SHOP_INFO } from '../config';
 
+import PageBanner from '../components/banner/PageBanner';
+
 export default function OrderOnlinePage({ onOpenCart }) {
   return (
     <div className="pt-24 min-h-screen">
       {/* 1. HEADER BANNER [DARK SECTION] */}
-      <div className="py-16 px-4 sm:px-6 text-center border-b border-cream/10 bg-charcoal text-cream relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-burnt/20 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-widest font-semibold mb-3">
-            <ShoppingBag className="w-3.5 h-3.5 text-orange-burnt" />
-            <span>Pickup & Delivery Options</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-cream mb-4">
-            Order Homers Online
-          </h1>
-          <p className="text-cream/70 text-sm sm:text-base max-w-xl mx-auto">
-            Choose direct pickup to support local family business with zero middleman markups,
-            or get convenient doorstep delivery via our delivery partners.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        variant="order"
+        badgeIcon={ShoppingBag}
+        badgeText="Pickup & Delivery Options"
+        title="Order Homers Online"
+        subtitle="Choose direct pickup to support local family business with zero middleman markups, or get convenient doorstep delivery via our delivery partners."
+        className="py-16 px-4 sm:px-6 text-center"
+      />
 
       {/* 2. MAIN ORDERING CHANNELS GRID [LIGHT SECTION] */}
       <div className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-b border-charcoal/10">

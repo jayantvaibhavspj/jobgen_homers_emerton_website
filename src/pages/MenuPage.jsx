@@ -5,34 +5,21 @@ import StoreMenuBoards from '../components/StoreMenuBoards';
 import { Utensils, Sparkles, Phone, ArrowRight, ShoppingBag } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 
+import PageBanner from '../components/banner/PageBanner';
+
 export default function MenuPage({ onAddToCart, cartCount, cartTotal, onOpenCart, onOpenCatering }) {
   return (
     <div className="pt-24 min-h-screen">
       {/* 1. PAGE HERO BANNER [DARK SECTION] */}
-      <div className="bg-charcoal text-cream py-16 px-4 sm:px-6 text-center border-b border-cream/10 relative overflow-hidden">
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-          <img
-            src="/homeslide.jpg"
-            alt="Menu Banner"
-            className="w-full h-full object-cover filter brightness-75"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/80 to-charcoal" />
-        </div>
-
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cream/10 border border-cream/20 text-orange-glow text-xs uppercase tracking-widest font-semibold mb-3">
-            <Utensils className="w-3.5 h-3.5 text-orange-burnt" />
-            <span>Freshly Prepared Daily</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-cream mb-4">
-            Takeaway & Dine Menu
-          </h1>
-          <p className="text-cream/70 text-sm sm:text-base max-w-xl mx-auto">
-            From flame-grilled Angus burgers and wild-caught crumbed fish to hot roast chickens and fragrant curries.
-            All prices in AUD.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        variant="menu"
+        bgPhoto="/homeslide.jpg"
+        badgeIcon={Utensils}
+        badgeText="Freshly Prepared Daily"
+        title="Takeaway & Dine Menu"
+        subtitle="From flame-grilled Angus burgers and wild-caught crumbed fish to hot roast chickens and fragrant curries. All prices in AUD."
+        className="py-16 px-4 sm:px-6 text-center"
+      />
 
       {/* 2. MAIN MENU COMPONENT WITH CATEGORY FILTERS & DISH CARDS [LIGHT SECTION] */}
       <div className="bg-cream text-charcoal">

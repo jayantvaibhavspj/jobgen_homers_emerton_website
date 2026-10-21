@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Clock, Mail, Send, CreditCard, Navigation, CheckCircle2, Star } from 'lucide-react';
 import { SHOP_INFO, OPERATING_HOURS, CUSTOMER_REVIEWS } from '../config';
 import { getShopStatus } from '../utils/sydneyTime';
+import PageBanner from '../components/banner/PageBanner';
 
 export default function ContactPage() {
   const [shopStatus, setShopStatus] = useState({ isOpen: true, label: '', todayIndex: 0 });
@@ -42,21 +43,15 @@ export default function ContactPage() {
   return (
     <div className="pt-24 min-h-screen">
       {/* 1. HEADER BANNER [DARK SECTION] */}
-      <div className="py-16 px-4 sm:px-6 text-center border-b border-cream/10 bg-charcoal text-cream relative overflow-hidden">
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-burnt/20 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-widest font-semibold mb-3">
-            <MapPin className="w-3.5 h-3.5 text-orange-burnt" />
-            <span>Western Sydney Store</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold text-cream mb-4">
-            Contact & Find Us
-          </h1>
-          <p className="text-cream/70 text-sm sm:text-base max-w-xl mx-auto">
-            Have a question about an order, catering, or dietary options?
-            Call our team directly or visit our shop on Popondetta Road.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        variant="contact"
+        badgeIcon={MapPin}
+        badgeText="Western Sydney Store"
+        title="Contact & Find Us"
+        subtitle="Have a question about an order, catering, or dietary options? Call our team directly or visit our shop on Popondetta Road."
+        isOpen={shopStatus.isOpen}
+        className="py-16 px-4 sm:px-6 text-center"
+      />
 
       {/* 2. QUICK INFO CARDS [LIGHT SECTION] */}
       <div className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-b border-charcoal/10">
