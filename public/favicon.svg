@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#c7341c" />
+      <stop offset="50%" stop-color="#e8700a" />
+      <stop offset="100%" stop-color="#ffb703" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#17110d" />
+  <circle cx="32" cy="32" r="26" fill="#221b16" stroke="#e8700a" stroke-width="2" />
+  <!-- Flame & Burger Silhouette -->
+  <path d="M32 12 C28 20 22 24 22 32 C22 39 27 44 32 44 C37 44 42 39 42 32 C42 26 38 21 35 18 C35 22 33 24 31 25 C31 22 33 16 32 12 Z" fill="url(#flameGrad)" />
+  <ellipse cx="32" cy="46" rx="14" ry="4" fill="#ffb703" opacity="0.9" />
+  <text x="32" y="55" font-family="'Kaushan Script', cursive" font-size="12" fill="#fbf6f0" text-anchor="middle" font-weight="bold">H</text>
+</svg>

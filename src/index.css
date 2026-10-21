@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-charcoal: #17110d;
+    --color-cream: #fbf6f0;
+    --color-orange: #e8700a;
+    --color-chilli: #c7341c;
+  }
+
+  html {
+    color-scheme: dark light;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #17110d;
+    color: #fbf6f0;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Lenis smooth scroll recommended styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .no-reduced-motion {
+    display: none !important;
+  }
+}
+
+/* Custom Glass & Utilities */
+.glass-pill {
+  background: rgba(251, 246, 240, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 112, 10, 0.15);
+}
+
+.glass-dark {
+  background: rgba(23, 17, 13, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(251, 246, 240, 0.08);
+}
+
+.glass-card {
+  background: rgba(251, 246, 240, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 246, 240, 0.08);
+}
+
+/* Subtle glow animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Continuous marquee */
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Flying item animation */
+@keyframes flyToCartKeyframes {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.3) translate(var(--fly-x, 150px), var(--fly-y, -300px));
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.1) translate(var(--fly-x, 150px), var(--fly-y, -300px));
+    opacity: 0;
+  }
+}
+
+.animate-fly-to-cart {
+  animation: flyToCartKeyframes 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
