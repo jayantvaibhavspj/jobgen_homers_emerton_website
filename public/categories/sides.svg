@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-sides" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-sides)">
+        <ellipse cx="55" cy="88" rx="38" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Red Takeaway Wire Basket */}
+        <path d="M22 62L28 86H82L88 62H22Z" fill="#dc2626" />
+        <ellipse cx="55" cy="62" rx="34" ry="7" fill="#ef4444" />
+        {/* Cascading Golden Chips */}
+        <rect x="34" y="32" width="7" height="34" rx="2" fill="#f59e0b" transform="rotate(-18 34 32)" />
+        <rect x="42" y="26" width="7" height="38" rx="2" fill="#fbbf24" transform="rotate(-8 42 26)" />
+        <rect x="52" y="22" width="7.5" height="42" rx="2" fill="#f59e0b" />
+        <rect x="62" y="26" width="7" height="38" rx="2" fill="#fbbf24" transform="rotate(8 62 26)" />
+        <rect x="70" y="32" width="7" height="34" rx="2" fill="#f59e0b" transform="rotate(18 70 32)" />
+        {/* Extra foreground chips */}
+        <rect x="44" y="36" width="6.5" height="30" rx="2" fill="#fef08a" transform="rotate(4 44 36)" />
+        <rect x="55" y="38" width="6.5" height="28" rx="2" fill="#fef08a" transform="rotate(-6 55 38)" />
+        {/* Chicken Salt Seasoning Specks */}
+        <circle cx="48" cy="30" r="1" fill="#fff" />
+        <circle cx="56" cy="26" r="1" fill="#fff" />
+        <circle cx="64" cy="34" r="1" fill="#fff" />
+      </g>
+    </svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-curry" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-curry)">
+        <ellipse cx="55" cy="88" rx="40" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Ceramic Curry Bowl */}
+        <ellipse cx="55" cy="74" rx="42" ry="16" fill="#171717" stroke="#e8700a" stroke-width="1.5" />
+        {/* Steaming Basmati Rice & Naan in rear */}
+        <path d="M72 44L92 36C96 52 86 64 74 68L72 44Z" fill="#fde68a" stroke="#d97706" stroke-width="1" />
+        <circle cx="82" cy="48" r="1.5" fill="#b45309" />
+        {/* Rich Butter Chicken Curry Lake */}
+        <ellipse cx="52" cy="72" rx="36" ry="12" fill="#ea580c" />
+        <ellipse cx="52" cy="71" rx="30" ry="9" fill="#f97316" />
+        {/* Tender Chicken Tikka Chunks */}
+        <ellipse cx="44" cy="70" rx="6" ry="4" fill="#b45309" />
+        <ellipse cx="58" cy="73" rx="7" ry="4.5" fill="#9a3412" />
+        <ellipse cx="64" cy="68" rx="5" ry="3.5" fill="#b45309" />
+        {/* Swirl of Fresh Cream */}
+        <path d="M40 70Q52 64 58 72Q64 78 52 76" stroke="#fef3c7" stroke-width="2.5" stroke-linecap="round" />
+        {/* Fresh Cilantro / Coriander garnish */}
+        <circle cx="50" cy="69" r="1.5" fill="#16a34a" />
+        <circle cx="54" cy="70" r="1.5" fill="#16a34a" />
+      </g>
+    </svg>

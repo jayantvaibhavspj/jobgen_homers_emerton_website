@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-fam" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-fam)">
+        <ellipse cx="55" cy="88" rx="44" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Family 1.25L Bottle (Right rear) */}
+        <path d="M78 32H88V82H78V32Z" fill="#1e3a8a" />
+        <rect x="80" y="26" width="6" height="6" fill="#ef4444" />
+        {/* Large Chips Bucket (Left rear) */}
+        <path d="M22 50L26 84H42L46 50H22Z" fill="#e8700a" />
+        <rect x="28" y="38" width="5" height="18" rx="1.5" fill="#fbbf24" />
+        <rect x="35" y="36" width="5" height="20" rx="1.5" fill="#f59e0b" />
+        {/* Center Whole Rotisserie Chicken on Platter */}
+        <ellipse cx="55" cy="76" rx="28" ry="10" fill="#262626" />
+        <path d="M38 68C36 54 46 44 55 44C65 44 74 54 72 68C70 78 40 78 38 68Z" fill="#d97706" />
+        <circle cx="45" cy="58" r="6" fill="#b45309" />
+        <circle cx="65" cy="58" r="6" fill="#b45309" />
+        {/* Steaming Hot Gravy Tub */}
+        <rect x="48" y="74" width="14" height="10" rx="2" fill="#78350f" stroke="#e8700a" stroke-width="1" />
+      </g>
+    </svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-chick" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="5" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-chick)">
+        <ellipse cx="55" cy="88" rx="40" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Cast Iron Roasting Pan */}
+        <ellipse cx="55" cy="80" rx="44" ry="12" fill="#262626" />
+        {/* Whole Roasted Chicken Body */}
+        <path d="M28 66C24 46 42 32 58 32C76 32 88 46 84 66C80 82 34 82 28 66Z" fill="#b45309" />
+        <path d="M34 64C30 48 45 36 58 36C72 36 82 48 78 64C74 77 38 77 34 64Z" fill="#d97706" />
+        {/* Drumsticks tied */}
+        <ellipse cx="44" cy="52" rx="9" ry="14" fill="#ea580c" transform="rotate(-25 44 52)" />
+        <ellipse cx="68" cy="52" rx="9" ry="14" fill="#ea580c" transform="rotate(25 68 52)" />
+        <circle cx="36" cy="40" r="4.5" fill="#f59e0b" />
+        <circle cx="76" cy="40" r="4.5" fill="#f59e0b" />
+        {/* Herb Flecks & Glaze */}
+        <circle cx="50" cy="48" r="1.2" fill="#15803d" />
+        <circle cx="62" cy="46" r="1.5" fill="#15803d" />
+        <circle cx="56" cy="58" r="1.2" fill="#15803d" />
+        {/* Rising Warm Steam */}
+        <path d="M50 26Q46 16 52 10" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+        <path d="M60 28Q66 18 58 8" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" opacity="0.7" />
+      </g>
+    </svg>

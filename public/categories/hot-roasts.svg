@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-roast" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-roast)">
+        <ellipse cx="55" cy="88" rx="42" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Stoneware Roast Plate */}
+        <ellipse cx="55" cy="78" rx="44" ry="14" fill="#262626" stroke="#404040" stroke-width="1.5" />
+        <ellipse cx="55" cy="77" rx="38" ry="11" fill="#171717" />
+        {/* Golden Roast Potatoes & Pumpkin */}
+        <ellipse cx="32" cy="73" rx="10" ry="7" fill="#d97706" />
+        <ellipse cx="33" cy="71" rx="8" ry="5" fill="#f59e0b" />
+        <ellipse cx="78" cy="74" rx="10" ry="6" fill="#ea580c" />
+        {/* Slow-Cooked Tender Beef / Pork Slices */}
+        <path d="M35 62C42 54 68 54 75 62C78 68 70 76 55 76C40 76 32 68 35 62Z" fill="#78350f" />
+        <path d="M38 56C46 48 64 48 72 56C74 61 66 69 55 69C44 69 36 61 38 56Z" fill="#92400e" />
+        <path d="M42 50C48 44 62 44 68 50C70 54 64 61 55 61C46 61 40 54 42 50Z" fill="#b45309" />
+        {/* Crispy Golden Pork Crackling on top */}
+        <path d="M46 44L52 38L58 44L64 39" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" />
+        {/* Rich Pan Gravy Drizzle */}
+        <path d="M44 54Q55 62 66 54Q60 70 54 72Q48 68 44 54Z" fill="#451a03" opacity="0.9" />
+        {/* Fresh Rosemary Sprig */}
+        <path d="M68 62L80 50 M72 57L70 52 M76 54L78 49" stroke="#15803d" stroke-width="1.5" stroke-linecap="round" />
+      </g>
+    </svg>

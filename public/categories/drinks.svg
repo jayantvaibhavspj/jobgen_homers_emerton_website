@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-drinks" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-drinks)">
+        <ellipse cx="55" cy="88" rx="38" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Chilled Can of Soft Drink (Left) */}
+        <rect x="24" y="42" width="22" height="42" rx="4" fill="#dc2626" />
+        <ellipse cx="35" cy="42" rx="11" ry="3.5" fill="#e5e7eb" />
+        <path d="M28 56Q35 62 42 56" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+        {/* Frost / condensation droplets */}
+        <circle cx="30" cy="66" r="1.2" fill="#fff" opacity="0.8" />
+        <circle cx="38" cy="72" r="1" fill="#fff" opacity="0.8" />
+        {/* Tall Diner Thickshake Glass (Right) */}
+        <path d="M56 36L64 82H78L86 36H56Z" fill="#f43f5e" opacity="0.9" />
+        {/* Glass Base & Foot */}
+        <rect x="67" y="82" width="8" height="4" fill="#94a3b8" />
+        <ellipse cx="71" cy="86" rx="12" ry="2.5" fill="#cbd5e1" />
+        {/* Whipped Cream Mountain */}
+        <path d="M58 36C56 26 66 22 71 22C76 22 86 26 84 36H58Z" fill="#fffdfa" />
+        {/* Glossy Red Glacé Cherry on top */}
+        <circle cx="71" cy="22" r="4.5" fill="#b91c1c" />
+        <path d="M71 18Q75 12 80 10" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round" />
+        {/* Striped Straw */}
+        <path d="M64 36L58 14L62 12" stroke="#e8700a" stroke-width="3" stroke-linecap="round" />
+      </g>
+    </svg>

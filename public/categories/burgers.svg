@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-burger" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="5" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-burger)">
+        <ellipse cx="55" cy="89" rx="38" ry="6" fill="#17110d" opacity="0.2" />
+        {/* Top Brioche Bun Crown */}
+        <path d="M26 48C26 28 39 18 55 18C71 18 84 28 84 48H26Z" fill="#d97706" />
+        {/* Toasted Sesame Seeds */}
+        <ellipse cx="42" cy="30" rx="1.5" ry="0.8" fill="#fef3c7" transform="rotate(-15 42 30)" />
+        <ellipse cx="55" cy="26" rx="1.5" ry="0.8" fill="#fef3c7" />
+        <ellipse cx="68" cy="32" rx="1.5" ry="0.8" fill="#fef3c7" transform="rotate(20 68 32)" />
+        <ellipse cx="50" cy="38" rx="1.5" ry="0.8" fill="#fef3c7" transform="rotate(5 50 38)" />
+        <ellipse cx="62" cy="40" rx="1.5" ry="0.8" fill="#fef3c7" transform="rotate(-10 62 40)" />
+        {/* Crispy Bacon Strips */}
+        <path d="M22 50C34 53 44 48 56 52C68 56 78 50 88 52" stroke="#991b1b" stroke-width="3" stroke-linecap="round" />
+        {/* Upper Melted Cheddar */}
+        <path d="M24 53C32 58 40 54 50 59C62 53 72 58 86 54" fill="#f59e0b" />
+        {/* Flame-Grilled Angus Patty 1 */}
+        <rect x="23" y="56" width="64" height="8" rx="4" fill="#451a03" />
+        <path d="M30 58L34 62 M45 58L49 62 M60 58L64 62 M75 58L79 62" stroke="#261005" stroke-width="1.5" />
+        {/* Lower Melted Cheddar Drips */}
+        <path d="M23 64C30 68 36 73 42 66C52 74 60 67 68 73C74 66 80 69 87 65" fill="#f59e0b" />
+        {/* Flame-Grilled Angus Patty 2 */}
+        <rect x="24" y="69" width="62" height="8" rx="4" fill="#451a03" />
+        {/* Tomato slice & Pickles */}
+        <rect x="28" y="77" width="54" height="4" rx="2" fill="#dc2626" />
+        {/* Crisp Lettuce */}
+        <path d="M20 81Q35 86 55 81Q75 86 90 81" stroke="#15803d" stroke-width="4" stroke-linecap="round" />
+        {/* Bottom Toasted Bun */}
+        <path d="M26 84C26 89 39 92 55 92C71 92 84 89 84 84H26Z" fill="#b45309" />
+      </g>
+    </svg>

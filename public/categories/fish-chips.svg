@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-seafood" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-seafood)">
+        <ellipse cx="55" cy="88" rx="42" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Hot Chips Mound in background */}
+        <rect x="28" y="58" width="6" height="28" rx="2" fill="#f59e0b" transform="rotate(-18 28 58)" />
+        <rect x="36" y="54" width="6" height="30" rx="2" fill="#fbbf24" transform="rotate(-6 36 54)" />
+        <rect x="44" y="56" width="6" height="28" rx="2" fill="#f59e0b" transform="rotate(8 44 56)" />
+        <rect x="70" y="55" width="6" height="30" rx="2" fill="#fbbf24" transform="rotate(14 70 55)" />
+        <rect x="76" y="60" width="6" height="26" rx="2" fill="#f59e0b" transform="rotate(22 76 60)" />
+        {/* Crispy Golden Crumbed Fish Fillet */}
+        <path d="M22 68C26 52 48 40 76 44C88 46 94 56 86 68C76 78 40 82 22 68Z" fill="#d97706" />
+        <path d="M26 66C32 54 50 44 74 47C84 49 88 56 82 65C74 74 42 78 26 66Z" fill="#f59e0b" />
+        {/* Tartare Sauce Dollop */}
+        <circle cx="58" cy="58" r="8" fill="#fef3c7" />
+        <circle cx="56" cy="56" r="1.5" fill="#15803d" />
+        <circle cx="61" cy="59" r="1.2" fill="#15803d" />
+        {/* Fresh Lemon Wedge */}
+        <path d="M68 66L84 62C88 74 78 84 66 82L68 66Z" fill="#facc15" />
+        <path d="M70 68L80 65C82 72 76 78 68 77L70 68Z" fill="#fef08a" />
+      </g>
+    </svg>

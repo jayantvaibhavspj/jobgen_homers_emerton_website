@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" fill="none" viewBox="0 0 110 100" fill="none"  >
+      <defs>
+        <filter id="shadow-jr" x="-10%" y="-10%" width="120%" height="130%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3.5" flood-color="#17110d" flood-opacity="0.25" />
+        </filter>
+      </defs>
+      <g filter="url(#shadow-jr)">
+        <ellipse cx="55" cy="88" rx="38" ry="7" fill="#17110d" opacity="0.2" />
+        {/* Bright Takeaway Fun Meal Box */}
+        <path d="M26 52L32 86H78L84 52H26Z" fill="#f59e0b" stroke="#d97706" stroke-width="1.5" />
+        {/* Box Top Handle */}
+        <path d="M42 52V36C42 30 68 30 68 36V52" stroke="#ea580c" stroke-width="3" stroke-linecap="round" />
+        {/* Golden Nuggets PEEKING OUT */}
+        <circle cx="44" cy="50" r="7" fill="#d97706" />
+        <circle cx="56" cy="46" r="7.5" fill="#f59e0b" />
+        <circle cx="66" cy="50" r="6.5" fill="#d97706" />
+        {/* Pop-Top Juice Bottle next to box */}
+        <rect x="74" y="58" width="14" height="28" rx="4" fill="#06b6d4" />
+        <rect x="77" y="52" width="8" height="6" rx="2" fill="#facc15" />
+        {/* Happy Smiley on box */}
+        <path d="M46 72Q55 80 64 72" stroke="#451a03" stroke-width="2.5" stroke-linecap="round" />
+        <circle cx="46" cy="65" r="2" fill="#451a03" />
+        <circle cx="64" cy="65" r="2" fill="#451a03" />
+      </g>
+    </svg>
