@@ -90,17 +90,17 @@ export default function MenuSection({ onAddToCart, cartCount, cartTotal, onOpenC
         </div>
 
         {/* Filter Chips Bar */}
-        <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 mb-10 gap-2 scrollbar-none no-scrollbar">
+        <div className="flex items-center justify-start lg:justify-center overflow-x-auto lg:flex-wrap pb-2 mb-10 gap-2 sm:gap-2.5 no-scrollbar scrollbar-none px-1">
           {MENU_CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex-shrink-0 inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-burnt ${
+                className={`flex-shrink-0 inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-burnt ${
                   isActive
-                    ? 'bg-charcoal text-cream shadow-warm scale-105'
-                    : 'bg-charcoal/5 hover:bg-charcoal/10 text-charcoal/80'
+                    ? 'bg-charcoal text-cream shadow-warm scale-105 border border-charcoal'
+                    : 'bg-charcoal/5 hover:bg-charcoal/10 text-charcoal/80 border border-charcoal/5'
                 }`}
               >
                 {cat.emoji && <span>{cat.emoji}</span>}
