@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { STORE_MENU_BOARDS } from '../config';
-import { Eye, X, ZoomIn, Sparkles, FileText, ExternalLink } from 'lucide-react';
+import { Eye, X, ZoomIn, FileText, ExternalLink } from 'lucide-react';
 
 export default function StoreMenuBoards() {
   const [activeBoard, setActiveBoard] = useState(null);

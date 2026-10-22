@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Star, Sparkles, Utensils, Flame, Fish, ArrowRight } from 'lucide-react';
+import { Utensils, Flame, Fish, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ASSEMBLY_CONFIG } from './burger-assembly/assemblyConfig';
 import { FOOD_CATEGORIES } from './burger-assembly/categoriesConfig';
@@ -911,8 +911,7 @@ export default function PlateRise({ theme = 'light' }) {
 
       {/* INTERACTIVE CATEGORY SWITCHER TABS (TOP OF SECTION) */}
       <div className="relative z-20 max-w-5xl mx-auto w-full flex flex-col items-center mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full card-chip text-xs font-semibold uppercase tracking-wider mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-orange-burnt animate-spin-slow" />
+        <div className="inline-flex items-center px-3 py-1 rounded-full card-chip text-xs font-semibold uppercase tracking-wider mb-3">
           <span>Interactive Fresh Food Showcase</span>
         </div>
 
@@ -984,9 +983,7 @@ export default function PlateRise({ theme = 'light' }) {
             }}
           >
             {activeCategory.badgeIcon === 'Fish' && <Fish className="w-3.5 h-3.5" />}
-            {activeCategory.badgeIcon === 'Star' && <Star className="w-3.5 h-3.5 fill-current" />}
             {activeCategory.badgeIcon === 'Utensils' && <Utensils className="w-3.5 h-3.5" />}
-            {activeCategory.badgeIcon === 'Sparkles' && <Sparkles className="w-3.5 h-3.5" />}
             {activeCategory.badgeIcon === 'Flame' && <Flame className="w-3.5 h-3.5" />}
             <span>{activeCategory.badge}</span>
           </div>

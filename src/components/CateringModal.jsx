@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Calendar, Users, Check, MessageSquare, Phone, AlertCircle, Sparkles } from 'lucide-react';
+import { X, Calendar, Users, Check, MessageSquare, Phone, AlertCircle } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 
 export default function CateringModal({ isOpen, onClose }) {
@@ -83,8 +83,7 @@ export default function CateringModal({ isOpen, onClose }) {
 
         {/* Modal Header */}
         <div className="mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-burnt/20 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-wider font-semibold mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-orange-burnt" />
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-orange-burnt/20 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-wider font-semibold mb-2">
             <span>Event & Party Packs</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-serif font-bold text-cream">

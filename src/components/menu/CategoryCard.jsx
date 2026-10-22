@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Check, Sparkles } from 'lucide-react';
+import { Check } from 'lucide-react';
 import CategoryFoodImage from './CategoryIcons';
 import { CATEGORY_RAIL_CONFIG } from './categoryRailConfig';
 

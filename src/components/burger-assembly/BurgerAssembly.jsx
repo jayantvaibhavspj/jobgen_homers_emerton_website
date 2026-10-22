@@ -1,5 +1,4 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
 import MeltingCheese from './MeltingCheese';
 import FriesPour from './FriesPour';
 import SeasoningRain from './SeasoningRain';
@@ -243,9 +242,8 @@ export default function BurgerAssembly({
         {/* Glass Floating Pill: "Cooked fresh to order" */}
         <div
           ref={pillRef}
-          className="absolute top-4 right-2 sm:top-6 sm:right-4 z-[50] px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-warm backdrop-blur-md bg-charcoal text-cream border border-orange-burnt/40 opacity-0 transform-gpu pointer-events-none"
+          className="absolute top-4 right-2 sm:top-6 sm:right-4 z-[50] px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center shadow-warm backdrop-blur-md bg-charcoal text-cream border border-orange-burnt/40 opacity-0 transform-gpu pointer-events-none"
         >
-          <Sparkles className="w-3.5 h-3.5 text-orange-burnt animate-spin-slow" />
           <span>Cooked fresh to order</span>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Clock, Flame, ArrowRight } from 'lucide-react';
+import { Clock, Flame, ArrowRight } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 
 export default function LunchBanner({ onOpenSpecials, onOpenMenu }) {

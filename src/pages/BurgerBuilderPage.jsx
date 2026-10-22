@@ -1,6 +1,6 @@
 import React from 'react';
 import BurgerBuilder from '../components/BurgerBuilder';
-import { Flame, Sparkles, ArrowRight, Utensils } from 'lucide-react';
+import { Flame, ArrowRight, Utensils } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import PageBanner from '../components/banner/PageBanner';

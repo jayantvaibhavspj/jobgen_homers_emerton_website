@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { CloudRain, Sun, Flame, Wind, Plus, Sparkles, CloudSun, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CloudRain, Sun, Flame, Wind, Plus, CloudSun, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fetchEmertonWeather } from '../utils/weatherApi';
 import { MENU_ITEMS } from '../config';
 

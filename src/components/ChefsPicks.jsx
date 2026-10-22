@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Plus, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CHEFS_PICKS_SETS } from '../config';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -124,8 +124,7 @@ export default function ChefsPicks({ onAddToCart }) {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-burnt/15 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-widest font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-orange-burnt" />
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-orange-burnt/15 border border-orange-burnt/30 text-orange-glow text-xs uppercase tracking-widest font-semibold mb-3">
             <span>Master Crafted Standouts</span>
           </div>
           <h2 className="text-4xl sm:text-6xl font-serif font-bold text-cream mb-4">

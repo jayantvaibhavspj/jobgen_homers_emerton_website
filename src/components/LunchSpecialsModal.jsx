@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { X, Clock, Flame, Plus, Check, ArrowRight, Phone, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+import { X, Clock, Flame, Plus, Check, ArrowRight, Phone, ChevronDown, ChevronUp } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 
 export const LUNCH_SPECIALS = [
@@ -340,7 +340,6 @@ export default function LunchSpecialsModal({ isOpen, onClose, onAddToCart, onOpe
         {/* Footer Actions (Fixed at bottom) */}
         <div className="p-4 sm:p-5 bg-charcoal border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2 text-xs text-cream/70">
-            <Sparkles className="w-4 h-4 text-orange-burnt flex-shrink-0" />
             <span>Craving full meal options, whole roasts, or custom burgers?</span>
           </div>
 

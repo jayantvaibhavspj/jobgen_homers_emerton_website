@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, AlertCircle, MessageSquare, Phone, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
+import { AlertCircle, MessageSquare, Phone, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 import PageBanner from '../components/banner/PageBanner';
 
@@ -71,7 +71,6 @@ export default function CateringPage() {
       {/* 1. HEADER BANNER [DARK SECTION] */}
       <PageBanner
         variant="catering"
-        badgeIcon={Sparkles}
         badgeText="Family & Corporate Celebrations"
         title="Party & Event Catering"
         subtitle="From birthdays and sporting club presentations to backyard family feasts. Generous trays of roasts, fresh salads, and hot party finger food."

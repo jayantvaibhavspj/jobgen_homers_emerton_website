@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Check, Sparkles, ShoppingBag, RotateCcw } from 'lucide-react';
+import { Check, ShoppingBag, RotateCcw } from 'lucide-react';
 import { BURGER_BUILDER_CONFIG } from '../config';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -103,13 +103,12 @@ export default function BurgerBuilder({ onAddToCart, theme = 'light' }) {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div
-            className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs uppercase tracking-widest font-semibold mb-3 ${
+            className={`inline-flex items-center px-3.5 py-1 rounded-full text-xs uppercase tracking-widest font-semibold mb-3 ${
               isLight
                 ? 'bg-orange-burnt/10 border border-orange-burnt/25 text-orange-burnt'
                 : 'bg-cream/10 border border-cream/20 text-orange-glow'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-orange-burnt" />
             <span>Interactive Scroll Experience</span>
           </div>
           <h2

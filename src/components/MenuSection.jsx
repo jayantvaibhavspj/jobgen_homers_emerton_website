@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Plus, Check, Sparkles, Search } from 'lucide-react';
+import { Plus, Check, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MENU_CATEGORIES, MENU_ITEMS } from '../config';
 import CategoryRail from './menu/CategoryRail';
@@ -94,8 +94,7 @@ export default function MenuSection({ onAddToCart, cartCount, cartTotal, onOpenC
       <div className="max-w-6xl mx-auto">
         {/* Section Title */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-burnt/10 border border-orange-burnt/25 text-orange-burnt text-xs uppercase tracking-widest font-semibold mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-orange-burnt" />
+          <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-orange-burnt/10 border border-orange-burnt/25 text-orange-burnt text-xs uppercase tracking-widest font-semibold mb-3">
             <span>Handmade Takeaway Menu</span>
           </div>
           <h2 className="text-4xl sm:text-6xl font-serif font-bold text-charcoal tracking-tight mb-4">

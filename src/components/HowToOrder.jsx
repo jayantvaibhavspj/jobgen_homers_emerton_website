@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { UtensilsCrossed, PhoneCall, ShoppingBag, Sparkles, Phone } from 'lucide-react';
+import { UtensilsCrossed, PhoneCall, ShoppingBag, Phone } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 import { ORDER_JOURNEY_CONFIG } from './how-to-order/orderJourneyConfig';
 import JourneyPath from './how-to-order/JourneyPath';
@@ -387,13 +387,12 @@ export default function HowToOrder({ theme = 'light' }) {
           {/* Pill Badge */}
           <div
             ref={badgeRef}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs uppercase tracking-widest font-semibold mb-3 will-change-transform ${
+            className={`inline-flex items-center px-3.5 py-1 rounded-full text-xs uppercase tracking-widest font-semibold mb-3 will-change-transform ${
               isLight
                 ? 'bg-orange-burnt/10 border border-orange-burnt/25 text-orange-burnt'
                 : 'bg-cream/10 border border-cream/20 text-orange-glow'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-orange-burnt" />
             <span>Fast & Effortless</span>
           </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Cpu, Zap, Smartphone, ExternalLink, ArrowRight, Layers, Bot } from 'lucide-react';
+import { Cpu, Zap, Smartphone, ExternalLink, ArrowRight, Layers, Bot } from 'lucide-react';
 import PageBanner from '../components/banner/PageBanner';
 
 export default function TechnologyPartnerPage() {
@@ -39,7 +39,6 @@ export default function TechnologyPartnerPage() {
       {/* 1. HEADER BANNER */}
       <PageBanner
         variant="story"
-        badgeIcon={Sparkles}
         badgeText="Official Technology Partnership"
         title="Technology Partner: JobGen.AI"
         subtitle="Powering Homers Emerton with cutting-edge digital experiences, bringing next-generation web performance and interactive technology to Western Sydney's favorite takeaway."

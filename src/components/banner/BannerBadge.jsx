@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Utensils, Flame, Sparkles, ShoppingBag, Heart, MapPin } from 'lucide-react';
+import { Utensils, Flame, ShoppingBag, Heart, MapPin } from 'lucide-react';
 import { BANNER_CONFIG } from './bannerConfig';
 
 /**

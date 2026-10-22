@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, Star } from 'lucide-react';
+import { Flame } from 'lucide-react';
 
 export default function MarqueeStrip() {
   const items = [

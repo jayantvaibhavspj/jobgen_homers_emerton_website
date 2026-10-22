@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, MapPin, Clock, Sparkles, Store } from 'lucide-react';
+import { Phone, MapPin, Clock, Store } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 import FooterScene from './footer-scene/FooterScene';
 import SceneDelivery from './footer-scene/SceneDelivery';
