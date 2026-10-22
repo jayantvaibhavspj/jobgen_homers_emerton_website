@@ -20,7 +20,7 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
 
   // DRAGGABLE FLOATING BUTTON STATE & LOGIC
   const BUTTON_SIZE = 64;
-  const MARGIN = 14;
+  const MARGIN = 28;
 
   const clampPosition = (x, y) => {
     if (typeof window === 'undefined') return { x, y };
@@ -35,8 +35,8 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
   const getInitialPosition = () => {
     if (typeof window === 'undefined') return { x: 100, y: 100 };
     const isMobile = window.innerWidth < 1024;
-    const rightMargin = window.innerWidth < 640 ? 16 : 24;
-    const bottomMargin = isMobile ? 84 : 28;
+    const rightMargin = window.innerWidth < 640 ? 20 : 36;
+    const bottomMargin = isMobile ? 96 : 36;
     return clampPosition(
       window.innerWidth - BUTTON_SIZE - rightMargin,
       window.innerHeight - BUTTON_SIZE - bottomMargin
@@ -45,6 +45,7 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
 
   const [position, setPosition] = useState(getInitialPosition);
   const [isDragging, setIsDragging] = useState(false);
+  const [hasUserMoved, setHasUserMoved] = useState(false);
 
   const dragRef = useRef({
     isMouseDown: false,
@@ -56,20 +57,25 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
     justDragged: false,
   });
 
-  // Clamp position on window resize or zoom in/out so it NEVER leaves the screen
+  // Keep position docked or clamped on window resize or zoom
   useEffect(() => {
     const handleViewportChange = () => {
-      setPosition((prev) => clampPosition(prev.x, prev.y));
+      setPosition((prev) => (hasUserMoved ? clampPosition(prev.x, prev.y) : getInitialPosition()));
     };
 
     window.addEventListener('resize', handleViewportChange);
     window.visualViewport?.addEventListener('resize', handleViewportChange);
 
+    // Initial sync
+    if (!hasUserMoved) {
+      setPosition(getInitialPosition());
+    }
+
     return () => {
       window.removeEventListener('resize', handleViewportChange);
       window.visualViewport?.removeEventListener('resize', handleViewportChange);
     };
-  }, []);
+  }, [hasUserMoved]);
 
   // Global mousemove & mouseup listeners for smooth dragging outside element bounds
   useEffect(() => {
@@ -82,6 +88,7 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
         dragRef.current.hasMoved = true;
         dragRef.current.justDragged = true;
         setIsDragging(true);
+        setHasUserMoved(true);
       }
 
       if (dragRef.current.hasMoved) {
@@ -91,6 +98,9 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
 
     const handleMouseUp = () => {
       if (dragRef.current.isMouseDown) {
+        if (dragRef.current.hasMoved) {
+          setHasUserMoved(true);
+        }
         dragRef.current.isMouseDown = false;
         setIsDragging(false);
         // small timeout to suppress click event if user was dragging
@@ -110,6 +120,7 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
         dragRef.current.hasMoved = true;
         dragRef.current.justDragged = true;
         setIsDragging(true);
+        setHasUserMoved(true);
       }
 
       if (dragRef.current.hasMoved) {
@@ -120,6 +131,9 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
 
     const handleTouchEnd = () => {
       if (dragRef.current.isMouseDown) {
+        if (dragRef.current.hasMoved) {
+          setHasUserMoved(true);
+        }
         dragRef.current.isMouseDown = false;
         setIsDragging(false);
         setTimeout(() => {
@@ -220,7 +234,7 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
     // 3. HOURS & TIMINGS
     if (lower.includes('hour') || lower.includes('time') || lower.includes('open') || lower.includes('close')) {
       return {
-        text: `We are currently **${status.isOpen ? '🟢 OPEN' : '🔴 CLOSED'}** (${status.label}).\n\n• Mon-Wed & Sun: 10:00 AM – 8:00 PM\n• Thu-Sat: 10:00 AM – 8:30 PM\n\nOrders are freshly prepared in roughly 15 minutes!`,
+        text: `We are currently **${status.isOpen ? '🟢 OPEN' : '🔴 CLOSED'}** (${status.label}).\n\n• Mon-Wed & Sun: 10:00 AM - 8:00 PM\n• Thu-Sat: 10:00 AM - 8:30 PM\n\nOrders are freshly prepared in roughly 15 minutes!`,
       };
     }
 
@@ -385,7 +399,7 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
             type="button"
             onClick={handleOpenClick}
             aria-label="Open food chat assistant with Homers logo"
-            title="Homers Assistant — Click to chat, drag to move anywhere"
+            title="Homers Assistant. Click to chat, drag to move anywhere"
             className={`relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-amber-50 via-white to-orange-100 border-[2.5px] border-orange-burnt shadow-2xl hover:shadow-[0_0_20px_rgba(217,83,30,0.6)] active:scale-95 transition-transform duration-200 focus:outline-none ${
               isDragging ? 'scale-105 ring-4 ring-orange-burnt/40' : 'group-hover:scale-105'
             }`}

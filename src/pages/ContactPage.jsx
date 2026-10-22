@@ -117,8 +117,8 @@ export default function ContactPage() {
                 </span>
               </div>
               <p className="text-xs card-box-body leading-relaxed">
-                Mon–Wed & Sun: 10am – 8pm<br />
-                Thu–Sat: 10am – 8:30pm
+                Mon - Wed & Sun: 10am - 8pm<br />
+                Thu - Sat: 10am - 8:30pm
               </p>
             </div>
             <div className="text-[11px] card-box-muted mt-4 flex items-center gap-1">

@@ -7,15 +7,14 @@ import { FOOTER_SCENE_CONFIG } from './footerSceneConfig';
  * twinkling stars with randomized stagger, and slow-drifting wispy clouds.
  */
 export default function SceneSky({ isPlaying = true, isReducedMotion = false, isMobile = false }) {
-  const { sky, palette } = FOOTER_SCENE_CONFIG;
+  const { sky } = FOOTER_SCENE_CONFIG;
   const starCount = isMobile ? sky.starCountMobile : sky.starCountDesktop;
 
-  // Generate deterministic star positions and twinkle parameters
+  // Generate deterministic star positions and twinkle parameters in upper night sky
   const stars = useMemo(() => {
     return Array.from({ length: starCount }, (_, i) => {
-      // Distribute stars mostly in upper 70% of sky
       const x = ((i * 47 + 13) % 1400) + 20;
-      const y = ((i * 31 + 7) % 210) + 15;
+      const y = ((i * 29 + 5) % 110) + 12;
       const r = (i % 5 === 0 ? 1.6 : i % 3 === 0 ? 1.2 : 0.85);
       const duration = sky.starTwinkleMinDuration + ((i * 1.3) % (sky.starTwinkleMaxDuration - sky.starTwinkleMinDuration));
       const delay = (i * 0.4) % 3;
@@ -28,8 +27,8 @@ export default function SceneSky({ isPlaying = true, isReducedMotion = false, is
     <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden" aria-hidden="true">
       <svg
         className="w-full h-full"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="xMidYBottom slice"
+        viewBox="0 0 1440 520"
+        preserveAspectRatio="xMidYTop slice"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -37,8 +36,9 @@ export default function SceneSky({ isPlaying = true, isReducedMotion = false, is
           {/* Deep night sky gradient */}
           <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#080605" stopOpacity="0.95" />
-            <stop offset="50%" stopColor="#120c09" stopOpacity="0.85" />
-            <stop offset="100%" stopColor="#1a120d" stopOpacity="0.6" />
+            <stop offset="35%" stopColor="#120c09" stopOpacity="0.85" />
+            <stop offset="70%" stopColor="#1a120d" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#120a06" stopOpacity="0.3" />
           </linearGradient>
 
           {/* Moon glow */}
@@ -58,9 +58,9 @@ export default function SceneSky({ isPlaying = true, isReducedMotion = false, is
         </defs>
 
         {/* Night background fill */}
-        <rect width="1440" height="320" fill="url(#skyGrad)" />
+        <rect width="1440" height="520" fill="url(#skyGrad)" />
 
-        {/* Twinkling Stars */}
+        {/* Twinkling Stars in upper night sky */}
         <g className="stars-group">
           {stars.map((star) => (
             <circle
@@ -79,7 +79,7 @@ export default function SceneSky({ isPlaying = true, isReducedMotion = false, is
           ))}
         </g>
 
-        {/* Crescent Moon with Soft Amber Glow (top right quarter) */}
+        {/* Crescent Moon with Soft Amber Glow (top right quarter, y = 55) */}
         <g
           className="moon-group"
           style={{
@@ -89,13 +89,13 @@ export default function SceneSky({ isPlaying = true, isReducedMotion = false, is
           }}
         >
           {/* Moon ambient glow */}
-          <circle cx="1180" cy="70" r="42" fill="url(#moonGlowGrad)" />
+          <circle cx="1180" cy="55" r="42" fill="url(#moonGlowGrad)" />
           {/* Subtle warm halo ring */}
-          <circle cx="1180" cy="70" r="22" fill="#ffd166" opacity="0.12" />
+          <circle cx="1180" cy="55" r="22" fill="#ffd166" opacity="0.12" />
 
           {/* Crescent Moon Path */}
           <path
-            d="M 1184 56 A 15 15 0 1 0 1195 83 A 13.5 13.5 0 1 1 1184 56 Z"
+            d="M 1184 41 A 15 15 0 1 0 1195 68 A 13.5 13.5 0 1 1 1184 41 Z"
             fill="#faeed8"
             opacity="0.88"
           />
@@ -106,7 +106,7 @@ export default function SceneSky({ isPlaying = true, isReducedMotion = false, is
           <g opacity={sky.cloudOpacity}>
             {/* Cloud 1 */}
             <path
-              d="M 120 90 Q 240 75 380 92 Q 480 105 600 88 Q 480 82 340 80 Q 200 82 120 90 Z"
+              d="M 120 70 Q 240 55 380 72 Q 480 85 600 68 Q 480 62 340 60 Q 200 62 120 70 Z"
               fill="url(#cloudGrad)"
               style={{
                 animation: (!isReducedMotion && isPlaying)
@@ -116,7 +116,7 @@ export default function SceneSky({ isPlaying = true, isReducedMotion = false, is
             />
             {/* Cloud 2 */}
             <path
-              d="M 800 65 Q 920 52 1080 68 Q 1200 78 1320 62 Q 1180 58 1020 55 Q 890 56 800 65 Z"
+              d="M 800 48 Q 920 35 1080 51 Q 1200 61 1320 45 Q 1180 41 1020 38 Q 890 39 800 48 Z"
               fill="url(#cloudGrad)"
               style={{
                 animation: (!isReducedMotion && isPlaying)

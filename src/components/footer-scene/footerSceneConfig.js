@@ -12,17 +12,18 @@ export const FOOTER_SCENE_CONFIG = {
   // 1. DIMENSIONS, HEIGHT & LAYOUT
   // --------------------------------------------------------------------------
   dimensions: {
-    heightPercentDesktop: 46, // ~46% of footer height
-    heightPercentTablet: 40,
-    heightPercentMobile: 34,
-    maxHeightDesktopPx: 380,
-    minHeightDesktopPx: 260,
-    maxHeightMobilePx: 220,
-    // Gradient mask smoothly fades the scene upward into #17110d charcoal
-    maskStopSolid: '40%',     // 100% visible up to 40% height
-    maskStopMid: '75%',       // 40% opacity at 75% height
-    maskStopTop: '100%',      // 0% opacity at top
+    heightPercentDesktop: 100, // 100% full footer coverage
+    heightPercentTablet: 100,
+    heightPercentMobile: 100,
+    maxHeightDesktopPx: null,
+    minHeightDesktopPx: null,
+    maxHeightMobilePx: null,
+    // Gentle gradient mask at very top so it blends smoothly under road ticker
+    maskStopSolid: '85%',     // Fully visible up to 85% height
+    maskStopMid: '95%',       // Soft fade near top
+    maskStopTop: '100%',      // Blends into charcoal top border
   },
+  sceneOpacity: 0.95, // Rich, vibrant shopfront visibility
 
   // --------------------------------------------------------------------------
   // 2. PALETTE & LIGHTING TOKENS
@@ -149,7 +150,7 @@ export const FOOTER_SCENE_CONFIG = {
     radialGlowMax: 0.42,
     radialGlowPeriod: 5.2,      // seconds loop
     dayNightCyclePeriod: 58,    // seconds slow cycle
-    scrimOverlayDarkness: 0.48, // dark scrim between scene and text for AA contrast
+    scrimOverlayDarkness: 0.22, // balanced scrim so the shop artwork shines through cleanly
   },
 
   // --------------------------------------------------------------------------

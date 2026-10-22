@@ -78,7 +78,6 @@ export default function Navbar({ cartCount, onOpenCart, onOpenCatering }) {
     { label: 'Menu', path: '/menu' },
     { label: 'Burger Builder', path: '/burger-builder' },
     { label: 'Catering', path: '/catering' },
-    { label: 'Order Online', path: '/order-online' },
     { label: 'Our Story', path: '/about-us' },
     { label: 'Contact', path: '/contact-us' },
   ];
@@ -126,21 +125,32 @@ export default function Navbar({ cartCount, onOpenCart, onOpenCatering }) {
             </div>
           </Link>
 
-          {/* CENTER: SPACIOUS DESKTOP NAV LINKS (Expanded & uncluttered) */}
-          <nav className="hidden lg:flex items-center space-x-1.5 xl:space-x-2" aria-label="Main Navigation">
+          {/* CENTER: SPACIOUS DESKTOP NAV LINKS (Clean typography with bottom orange underline) */}
+          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `px-3.5 xl:px-4 py-2 text-xs xl:text-sm font-semibold tracking-wide rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-burnt ${
+                  `relative group px-3.5 xl:px-4 py-2 text-xs xl:text-sm font-semibold tracking-wide transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-burnt ${
                     isActive
-                      ? 'bg-orange-burnt text-white shadow-warm'
-                      : 'text-cream/80 hover:text-white hover:bg-cream/10'
+                      ? 'text-white font-bold'
+                      : 'text-cream/75 hover:text-white'
                   }`
                 }
               >
-                {link.label}
+                {({ isActive }) => (
+                  <>
+                    <span>{link.label}</span>
+                    <span
+                      className={`absolute bottom-0 left-2.5 right-2.5 h-[2.5px] bg-orange-burnt rounded-full transition-all duration-200 shadow-[0_0_8px_rgba(232,112,10,0.7)] ${
+                        isActive
+                          ? 'opacity-100 scale-x-100'
+                          : 'opacity-0 scale-x-0 group-hover:opacity-70 group-hover:scale-x-75'
+                      }`}
+                    />
+                  </>
+                )}
               </NavLink>
             ))}
           </nav>
@@ -252,6 +262,14 @@ export default function Navbar({ cartCount, onOpenCart, onOpenCatering }) {
 
         {/* Bottom Details in Drawer */}
         <div className="border-t border-cream/10 pt-5 space-y-3.5 text-sm text-cream/80">
+          <Link
+            to="/order-online"
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full py-3 px-6 rounded-full bg-orange-burnt hover:bg-orange-600 text-white font-bold text-center block shadow-warm text-sm transition-colors"
+          >
+            Order Online
+          </Link>
+
           <div className="flex items-center gap-2 text-orange-glow font-medium">
             <Clock className="w-4 h-4 text-orange-burnt" />
             <span>{shopStatus.label}</span>

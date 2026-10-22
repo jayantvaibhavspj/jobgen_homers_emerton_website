@@ -184,7 +184,7 @@ export default function LunchSpecialsModal({ isOpen, onClose, onAddToCart, onOpe
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-charcoal text-orange-glow border border-orange-burnt/40 text-xs font-mono">
               <Clock className="w-3.5 h-3.5 text-orange-burnt" />
-              Daily 11:00 AM – 2:00 PM
+              Daily 11:00 AM - 2:00 PM
             </span>
 
             {/* Quick Interactive Scroll Controls */}

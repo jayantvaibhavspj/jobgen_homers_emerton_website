@@ -11,6 +11,7 @@ export default function FloatingTickets({
   isPlaying = true,
   isReducedMotion = false,
   isMobile = false,
+  offsetX = 0,
 }) {
   const { tickets } = FOOTER_SCENE_CONFIG;
   const count = isMobile ? tickets.countMobile : tickets.countDesktop;
@@ -19,7 +20,7 @@ export default function FloatingTickets({
   const ticketItems = useMemo(() => {
     return Array.from({ length: count }, (_, i) => {
       const baseX = 640 + (i * 24) - 30; // centered around shop window
-      const baseY = 245;
+      const baseY = 410;
       const duration = 5.2 + i * 1.1;
       const delay = i * 1.8;
       const rot = (i % 2 === 0 ? 1 : -1) * (12 + i * 4);
@@ -35,8 +36,8 @@ export default function FloatingTickets({
     <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden" aria-hidden="true">
       <svg
         className="w-full h-full"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="xMidYBottom slice"
+        viewBox="0 0 1440 520"
+        preserveAspectRatio="xMidYTop slice"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -48,7 +49,7 @@ export default function FloatingTickets({
           </linearGradient>
         </defs>
 
-        <g id="order-tickets-group">
+        <g id="order-tickets-group" transform={`translate(${offsetX}, 0)`}>
           {ticketItems.map((t) => (
             <g
               key={t.id}

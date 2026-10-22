@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { CloudRain, Sun, Flame, Wind, Plus, Sparkles, CloudSun } from 'lucide-react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { CloudRain, Sun, Flame, Wind, Plus, Sparkles, CloudSun, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fetchEmertonWeather } from '../utils/weatherApi';
 import { MENU_ITEMS } from '../config';
 
 export default function WeatherSpecial({ onAddToCart }) {
   const [weatherData, setWeatherData] = useState(null);
+  const [activeSetIndex, setActiveSetIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFading, setIsFading] = useState(false);
   const canvasRef = useRef(null);
+  const timerRef = useRef(null);
 
   useEffect(() => {
     fetchEmertonWeather().then((res) => {
@@ -49,7 +53,6 @@ export default function WeatherSpecial({ onAddToCart }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (isRainy) {
-        // Soft rain streaks & steam
         ctx.strokeStyle = 'rgba(186, 230, 253, 0.25)';
         ctx.lineWidth = 1;
         particles.forEach((p) => {
@@ -66,7 +69,6 @@ export default function WeatherSpecial({ onAddToCart }) {
           }
         });
       } else if (isHot) {
-        // Sun shimmer rays
         particles.forEach((p) => {
           ctx.beginPath();
           ctx.arc(p.x, p.y, Math.random() * 20 + 10, 0, Math.PI * 2);
@@ -77,7 +79,6 @@ export default function WeatherSpecial({ onAddToCart }) {
           if (p.y < -20) p.y = canvas.height + 20;
         });
       } else {
-        // Mild mode: Warm golden embers
         particles.forEach((p) => {
           ctx.beginPath();
           ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
@@ -100,16 +101,103 @@ export default function WeatherSpecial({ onAddToCart }) {
     };
   }, [weatherData]);
 
-  if (!weatherData) return null;
+  // Compute 4 diverse sets of 3 unique weather-matched dishes
+  const weatherSets = useMemo(() => {
+    if (!weatherData) return [];
+    const focus = (weatherData.categoryFocus && weatherData.categoryFocus.length > 0)
+      ? weatherData.categoryFocus
+      : ['burgers', 'fish-chips', 'curries'];
 
-  // Filter recommendations based on current weather focus categories
-  const recommendedItems = MENU_ITEMS.filter((item) =>
-    weatherData.categoryFocus.includes(item.category)
-  ).slice(0, 3);
+    const priorityItems = MENU_ITEMS.filter((item) => focus.includes(item.category));
+    const backupItems = MENU_ITEMS.filter((item) => !focus.includes(item.category));
+    const fullPool = [...priorityItems, ...backupItems];
+
+    const NUM_SETS = 4;
+    const SET_SIZE = 3;
+    const sets = [];
+    const usedIds = new Set();
+
+    for (let s = 0; s < NUM_SETS; s++) {
+      const setDishes = [];
+      // Attempt 1 item from each focus category for culinary variety in every rotation
+      focus.slice(0, SET_SIZE).forEach((cat) => {
+        const item = fullPool.find(
+          (m) => m.category === cat && !usedIds.has(m.id)
+        );
+        if (item) {
+          setDishes.push(item);
+          usedIds.add(item.id);
+        }
+      });
+
+      // Fill remaining slots up to SET_SIZE with unused items
+      while (setDishes.length < SET_SIZE) {
+        const nextItem = fullPool.find((m) => !usedIds.has(m.id));
+        if (nextItem) {
+          setDishes.push(nextItem);
+          usedIds.add(nextItem.id);
+        } else {
+          const loopItem = fullPool[setDishes.length % fullPool.length];
+          setDishes.push(loopItem);
+        }
+      }
+      sets.push(setDishes);
+    }
+    return sets;
+  }, [weatherData]);
+
+  const totalSets = weatherSets.length;
+
+  const goToNextSet = useCallback(() => {
+    if (totalSets === 0) return;
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveSetIndex((prev) => (prev + 1) % totalSets);
+      setIsFading(false);
+    }, 220);
+  }, [totalSets]);
+
+  const goToPrevSet = useCallback(() => {
+    if (totalSets === 0) return;
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveSetIndex((prev) => (prev - 1 + totalSets) % totalSets);
+      setIsFading(false);
+    }, 220);
+  }, [totalSets]);
+
+  const goToSet = useCallback((index) => {
+    if (index === activeSetIndex || totalSets === 0) return;
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveSetIndex(index);
+      setIsFading(false);
+    }, 220);
+  }, [activeSetIndex, totalSets]);
+
+  // Auto-rotate every 3 seconds (3000ms), paused when user hovers
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || isHovered || totalSets <= 1) return;
+
+    timerRef.current = setInterval(() => {
+      goToNextSet();
+    }, 3000);
+
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [goToNextSet, isHovered, totalSets]);
+
+  if (!weatherData || weatherSets.length === 0) return null;
+
+  const currentItems = weatherSets[activeSetIndex] || weatherSets[0];
 
   return (
     <section
       id="weather-specials"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className="relative bg-charcoal-100 py-20 px-4 sm:px-6 overflow-hidden border-t border-cream/10"
     >
       {/* Particle Canvas */}
@@ -144,21 +232,63 @@ export default function WeatherSpecial({ onAddToCart }) {
             </p>
           </div>
 
-          <a
-            href="#menu"
-            className="inline-flex items-center gap-1.5 text-xs text-orange-glow hover:text-white font-semibold transition-colors underline underline-offset-4"
-          >
-            <span>Explore all dishes</span>
-            <span>→</span>
-          </a>
+          {/* Navigation Controls + Explore Link */}
+          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
+            {/* Interactive Prev/Next & Dots */}
+            <div className="flex items-center gap-1.5 bg-charcoal/80 border border-cream/15 rounded-full p-1 backdrop-blur-md shadow-md">
+              <button
+                onClick={goToPrevSet}
+                className="w-7 h-7 rounded-full bg-cream/5 hover:bg-orange-burnt text-cream/70 hover:text-white flex items-center justify-center transition-colors active:scale-95"
+                aria-label="Previous dishes"
+                title="Previous dishes"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+
+              <div className="flex items-center gap-1.5 px-1.5">
+                {weatherSets.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => goToSet(idx)}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      idx === activeSetIndex
+                        ? 'w-5 bg-orange-burnt shadow-warm'
+                        : 'w-1.5 bg-cream/30 hover:bg-cream/60'
+                    }`}
+                    aria-label={`Go to set ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={goToNextSet}
+                className="w-7 h-7 rounded-full bg-cream/5 hover:bg-orange-burnt text-cream/70 hover:text-white flex items-center justify-center transition-colors active:scale-95"
+                aria-label="Next dishes"
+                title="Next dishes"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+
+            <a
+              href="#menu"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs text-orange-glow hover:text-white font-semibold transition-colors underline underline-offset-4"
+            >
+              <span>Explore all dishes</span>
+              <span>→</span>
+            </a>
+          </div>
         </div>
 
-        {/* 3 Weather-Reactive Cards */}
+        {/* 3 Weather-Reactive Cards with Smooth Transition */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {recommendedItems.map((item) => (
+          {currentItems.map((item, idx) => (
             <div
-              key={item.id}
-              className="group bg-charcoal-50 rounded-[20px] p-5 border border-cream/10 hover:border-orange-burnt/40 shadow-warm transition-all duration-300 flex flex-col justify-between"
+              key={`${activeSetIndex}-${item.id}`}
+              className={`group bg-charcoal-50 rounded-[20px] p-5 border border-cream/10 hover:border-orange-burnt/40 shadow-warm transition-all duration-300 flex flex-col justify-between ${
+                isFading ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
+              }`}
+              style={{ transitionDelay: `${idx * 40}ms` }}
             >
               <div>
                 <div className="relative aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-charcoal">

@@ -3,12 +3,14 @@ import { FOOTER_SCENE_CONFIG } from './footerSceneConfig';
 
 /**
  * SceneDelivery Layer
- * Road surface with:
- * - Outbound delivery scooter with delivery box driving across every ~8.2s
- * - Headlight cone beam casting light onto road + subtle glowing light trail
- * - Occasional return scooter in opposite direction every ~17.5s
- * - Dotted route line glowing behind
- * - Easter egg: clicking road/scooter area triggers immediate bonus scooter pass
+ * Dedicated separate road strip situated BELOW the bottom bar (Height: 60px).
+ *
+ * Rules:
+ * - Operates inside reserved 60px road strip below bottom bar.
+ * - Delivery scooter cruises smoothly on dark asphalt pavement with headlight beam.
+ * - Occasional return scooter in opposite direction.
+ * - No parked scooter (floating orange bracket removed).
+ * - Never overlaps the copyright line, "Powered by Jobgen" pill, or back-to-top button.
  */
 export default function SceneDelivery({
   isPlaying = true,
@@ -23,7 +25,6 @@ export default function SceneDelivery({
   const forwardTimerRef = useRef(null);
   const returnTimerRef = useRef(null);
 
-  // Trigger forward scooter drive
   const triggerForward = useCallback(() => {
     setForwardPass(true);
     setTimeout(() => {
@@ -31,7 +32,6 @@ export default function SceneDelivery({
     }, delivery.forwardDuration * 1000);
   }, [delivery.forwardDuration]);
 
-  // Trigger return scooter drive (desktop/tablet only)
   const triggerReturn = useCallback(() => {
     if (isMobile) return;
     setReturnPass(true);
@@ -40,25 +40,22 @@ export default function SceneDelivery({
     }, delivery.returnDuration * 1000);
   }, [isMobile, delivery.returnDuration]);
 
-  // Easter egg: bonus scooter pass
   const handleEasterEgg = () => {
     if (bonusPass || isReducedMotion) return;
     setBonusPass(true);
     setTimeout(() => {
       setBonusPass(false);
-    }, (delivery.forwardDuration * 0.75) * 1000); // 25% faster bonus pass
+    }, (delivery.forwardDuration * 0.75) * 1000);
   };
 
   useEffect(() => {
     if (!isPlaying || isReducedMotion) return;
 
-    // Start initial forward pass shortly after load
     const startTimeout = setTimeout(() => {
       triggerForward();
       forwardTimerRef.current = setInterval(triggerForward, delivery.forwardInterval);
-    }, 1200);
+    }, 1000);
 
-    // Return pass interval (only if not mobile)
     let returnTimeout;
     if (!isMobile) {
       returnTimeout = setTimeout(() => {
@@ -76,16 +73,15 @@ export default function SceneDelivery({
   }, [isPlaying, isReducedMotion, isMobile, triggerForward, triggerReturn, delivery.forwardInterval, delivery.returnInterval]);
 
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden" aria-hidden="true">
+    <div className="w-full h-full pointer-events-none select-none overflow-hidden relative" aria-hidden="true">
       <svg
         className="w-full h-full"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="xMidYBottom slice"
+        viewBox="0 0 1440 60"
+        preserveAspectRatio="none"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Headlight beam gradient (Left to Right) */}
           <linearGradient id="headlightGradLR" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#fff8db" stopOpacity="0.85" />
             <stop offset="30%" stopColor="#fed7aa" stopOpacity="0.45" />
@@ -93,7 +89,6 @@ export default function SceneDelivery({
             <stop offset="100%" stopColor="#e8700a" stopOpacity="0" />
           </linearGradient>
 
-          {/* Headlight beam gradient (Right to Left) */}
           <linearGradient id="headlightGradRL" x1="100%" y1="0%" x2="0%" y2="0%">
             <stop offset="0%" stopColor="#fff8db" stopOpacity="0.85" />
             <stop offset="30%" stopColor="#fed7aa" stopOpacity="0.45" />
@@ -101,48 +96,41 @@ export default function SceneDelivery({
             <stop offset="100%" stopColor="#e8700a" stopOpacity="0" />
           </linearGradient>
 
-          {/* Scooter trail red glow */}
           <linearGradient id="tailTrailGrad" x1="100%" y1="0%" x2="0%" y2="0%">
             <stop offset="0%" stopColor="#ef4444" stopOpacity="0.75" />
             <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
           </linearGradient>
         </defs>
 
-        {/* ============================================================== */}
-        {/* ROAD SURFACE & CURB                                            */}
-        {/* ============================================================== */}
+        {/* ROAD SURFACE (60px height) */}
         <g id="road-surface">
-          {/* Curb edge highlight */}
-          <line x1="0" y1="292" x2="1440" y2="292" stroke="#2c1a11" strokeWidth="2" />
-          {/* Road dark asphalt pavement */}
-          <rect x="0" y="293" width="1440" height="27" fill="#0d0907" />
-          {/* Faint dashed center line */}
+          <rect x="0" y="0" width="1440" height="60" fill="#0d0907" />
+          {/* Top curb edge highlight */}
+          <line x1="0" y1="2" x2="1440" y2="2" stroke="#2c1a11" strokeWidth="2" />
+          {/* Dashed center line */}
           <line
             x1="0"
-            y1="305"
+            y1="32"
             x2="1440"
-            y2="305"
+            y2="32"
             stroke="#26170e"
             strokeWidth="1.5"
             strokeDasharray="14 18"
           />
-
-          {/* Dotted Takeaway Delivery Route (subtly lights up) */}
+          {/* Dotted Takeaway Delivery Route */}
           <line
             x1="0"
-            y1="301"
+            y1="25"
             x2="1440"
-            y2="301"
+            y2="25"
             stroke="#ea580c"
             strokeWidth="1.2"
             strokeDasharray="4 10"
-            opacity="0.32"
+            opacity="0.35"
           />
         </g>
 
-        {/* ============================================================== */}
-        {/* OUTBOUND SCOOTER (Left to Right)                               */}
-        {/* ============================================================== */}
+        {/* OUTBOUND SCOOTER (Left to Right) */}
         {(forwardPass || isReducedMotion) && (
           <g
             id="scooter-forward"
@@ -153,58 +141,49 @@ export default function SceneDelivery({
               transform: isReducedMotion ? 'translateX(720px)' : 'translateX(-120px)',
             }}
           >
-            {/* Scooter Light Trail behind */}
-            <path d="M -30 294 L -70 294" stroke="url(#tailTrailGrad)" strokeWidth="3" opacity="0.6" strokeLinecap="round" />
+            {/* Scooter Light Trail */}
+            <path d="M -30 36 L -70 36" stroke="url(#tailTrailGrad)" strokeWidth="3" opacity="0.6" strokeLinecap="round" />
 
-            {/* Headlight Conical Beam onto road */}
+            {/* Headlight Conical Beam */}
             <polygon
-              points="15,286 110,274 125,306 15,294"
+              points="15,28 120,16 135,48 15,36"
               fill="url(#headlightGradLR)"
-              opacity="0.4"
+              opacity="0.45"
             />
 
-            {/* Scooter Silhouette Body */}
             {/* Rear wheel */}
-            <circle cx="-16" cy="296" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
-            <circle cx="-16" cy="296" r="2.5" fill="#f59e0b" />
+            <circle cx="-16" cy="38" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
+            <circle cx="-16" cy="38" r="2.5" fill="#f59e0b" />
             {/* Front wheel */}
-            <circle cx="16" cy="296" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
-            <circle cx="16" cy="296" r="2.5" fill="#f59e0b" />
+            <circle cx="16" cy="38" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
+            <circle cx="16" cy="38" r="2.5" fill="#f59e0b" />
 
             {/* Chassis & Floorboard */}
             <path
-              d="M -16 295 L -2 295 L 4 286 L 14 286 L 16 295"
+              d="M -16 37 L -2 37 L 4 28 L 14 28 L 16 37"
               fill="none"
               stroke="#e8700a"
               strokeWidth="2.5"
               strokeLinecap="round"
             />
-            {/* Front steering column & Handlebars */}
-            <line x1="8" y1="286" x2="6" y2="272" stroke="#e8700a" strokeWidth="2.2" strokeLinecap="round" />
-            <line x1="3" y1="272" x2="10" y2="272" stroke="#fbf6f0" strokeWidth="2" strokeLinecap="round" />
-            {/* Front Headlight Lamp */}
-            <circle cx="14" cy="286" r="2.5" fill="#fffbeb" />
+            {/* Steering & Handlebars */}
+            <line x1="8" y1="28" x2="6" y2="14" stroke="#e8700a" strokeWidth="2.2" strokeLinecap="round" />
+            <line x1="3" y1="14" x2="10" y2="14" stroke="#fbf6f0" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="14" cy="28" r="2.5" fill="#fffbeb" />
 
-            {/* Rear Homers Takeaway Insulated Delivery Box */}
-            <rect x="-24" y="271" width="15" height="15" rx="2.5" fill="#ea580c" stroke="#fff3e0" strokeWidth="1" />
-            {/* Tiny "H" on delivery bag */}
-            <text x="-16.5" y="282" fill="#fff" fontSize="8" fontWeight="bold" textAnchor="middle">H</text>
+            {/* Homers Takeaway Delivery Box */}
+            <rect x="-24" y="13" width="15" height="15" rx="2.5" fill="#ea580c" stroke="#fff3e0" strokeWidth="1" />
+            <text x="-16.5" y="24" fill="#fff" fontSize="8" fontWeight="bold" textAnchor="middle">H</text>
 
-            {/* Scooter Rider Silhouette */}
-            {/* Rider Torso */}
-            <path d="M -9 285 L -5 272 L 2 274 L 5 285 Z" fill="#2d1c12" />
-            {/* Rider Arms holding handlebars */}
-            <line x1="-3" y1="275" x2="6" y2="273" stroke="#2d1c12" strokeWidth="2" strokeLinecap="round" />
-            {/* Helmet */}
-            <circle cx="-3" cy="265" r="5" fill="#e8700a" />
-            {/* Helmet Visor */}
-            <path d="M -1 264 Q 2 265 0 268" stroke="#fbf6f0" strokeWidth="1.5" strokeLinecap="round" />
+            {/* Rider */}
+            <path d="M -9 27 L -5 14 L 2 16 L 5 27 Z" fill="#2d1c12" />
+            <line x1="-3" y1="17" x2="6" y2="15" stroke="#2d1c12" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="-3" cy="7" r="5" fill="#e8700a" />
+            <path d="M -1 6 Q 2 7 0 10" stroke="#fbf6f0" strokeWidth="1.5" strokeLinecap="round" />
           </g>
         )}
 
-        {/* ============================================================== */}
-        {/* RETURN SCOOTER (Right to Left - Occasional)                    */}
-        {/* ============================================================== */}
+        {/* RETURN SCOOTER (Right to Left) */}
         {returnPass && !isReducedMotion && !isMobile && (
           <g
             id="scooter-return"
@@ -213,45 +192,36 @@ export default function SceneDelivery({
               transform: 'translateX(1520px)',
             }}
           >
-            {/* Headlight Conical Beam (facing left) */}
             <polygon
-              points="-15,286 -110,274 -125,306 -15,294"
+              points="-15,28 -120,16 -135,48 -15,36"
               fill="url(#headlightGradRL)"
-              opacity="0.35"
+              opacity="0.4"
             />
+            <circle cx="16" cy="38" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
+            <circle cx="16" cy="38" r="2.5" fill="#f59e0b" />
+            <circle cx="-16" cy="38" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
+            <circle cx="-16" cy="38" r="2.5" fill="#f59e0b" />
 
-            {/* Scooter Wheels */}
-            <circle cx="16" cy="296" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
-            <circle cx="16" cy="296" r="2.5" fill="#f59e0b" />
-            <circle cx="-16" cy="296" r="6" fill="#1e110a" stroke="#3d2417" strokeWidth="1.5" />
-            <circle cx="-16" cy="296" r="2.5" fill="#f59e0b" />
-
-            {/* Chassis */}
             <path
-              d="M 16 295 L 2 295 L -4 286 L -14 286 L -16 295"
+              d="M 16 37 L 2 37 L -4 28 L -14 28 L -16 37"
               fill="none"
               stroke="#fbbf24"
               strokeWidth="2.5"
               strokeLinecap="round"
             />
-            {/* Steering */}
-            <line x1="-8" y1="286" x2="-6" y2="272" stroke="#fbbf24" strokeWidth="2.2" strokeLinecap="round" />
-            <circle cx="-14" cy="286" r="2.5" fill="#fffbeb" />
+            <line x1="-8" y1="28" x2="-6" y2="14" stroke="#fbbf24" strokeWidth="2.2" strokeLinecap="round" />
+            <circle cx="-14" cy="28" r="2.5" fill="#fffbeb" />
 
-            {/* Rear Delivery Box */}
-            <rect x="9" y="271" width="15" height="15" rx="2.5" fill="#ea580c" stroke="#fff3e0" strokeWidth="1" />
-            <text x="16.5" y="282" fill="#fff" fontSize="8" fontWeight="bold" textAnchor="middle">H</text>
+            <rect x="9" y="13" width="15" height="15" rx="2.5" fill="#ea580c" stroke="#fff3e0" strokeWidth="1" />
+            <text x="16.5" y="24" fill="#fff" fontSize="8" fontWeight="bold" textAnchor="middle">H</text>
 
-            {/* Rider */}
-            <path d="M 9 285 L 5 272 L -2 274 L -5 285 Z" fill="#2d1c12" />
-            <line x1="3" y1="275" x2="-6" y2="273" stroke="#2d1c12" strokeWidth="2" strokeLinecap="round" />
-            <circle cx="3" cy="265" r="5" fill="#d97706" />
+            <path d="M 9 27 L 5 14 L -2 16 L -5 27 Z" fill="#2d1c12" />
+            <line x1="3" y1="17" x2="-6" y2="15" stroke="#2d1c12" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="3" cy="7" r="5" fill="#d97706" />
           </g>
         )}
 
-        {/* ============================================================== */}
-        {/* BONUS SCOOTER (Easter Egg Pass)                                */}
-        {/* ============================================================== */}
+        {/* BONUS SCOOTER (Easter Egg) */}
         {bonusPass && !isReducedMotion && (
           <g
             id="scooter-bonus"
@@ -261,23 +231,23 @@ export default function SceneDelivery({
             }}
           >
             <polygon
-              points="15,286 130,270 145,308 15,294"
+              points="15,28 130,12 145,50 15,36"
               fill="url(#headlightGradLR)"
               opacity="0.55"
             />
-            <circle cx="-16" cy="296" r="6" fill="#1e110a" stroke="#ff8a1f" strokeWidth="2" />
-            <circle cx="16" cy="296" r="6" fill="#1e110a" stroke="#ff8a1f" strokeWidth="2" />
-            <rect x="-24" y="271" width="15" height="15" rx="2.5" fill="#ff8a1f" stroke="#fff" strokeWidth="1.2" />
-            <circle cx="-3" cy="265" r="5" fill="#ffd166" />
+            <circle cx="-16" cy="38" r="6" fill="#1e110a" stroke="#ff8a1f" strokeWidth="2" />
+            <circle cx="16" cy="38" r="6" fill="#1e110a" stroke="#ff8a1f" strokeWidth="2" />
+            <rect x="-24" y="13" width="15" height="15" rx="2.5" fill="#ff8a1f" stroke="#fff" strokeWidth="1.2" />
+            <circle cx="-3" cy="7" r="5" fill="#ffd166" />
           </g>
         )}
 
-        {/* Easter Egg Trigger: Transparent click area over the road */}
+        {/* Easter Egg Trigger */}
         <rect
           x="0"
-          y="280"
+          y="0"
           width="1440"
-          height="35"
+          height="60"
           fill="transparent"
           tabIndex="-1"
           className="cursor-pointer"
@@ -287,7 +257,6 @@ export default function SceneDelivery({
         />
       </svg>
 
-      {/* Embedded CSS for Scooter Drives */}
       <style>{`
         @keyframes scooterDriveForward {
           0% {

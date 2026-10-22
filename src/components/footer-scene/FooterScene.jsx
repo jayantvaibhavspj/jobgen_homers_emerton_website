@@ -139,35 +139,21 @@ export default function FooterScene() {
   return (
     <div
       ref={containerRef}
-      className="absolute bottom-0 left-0 right-0 w-full overflow-hidden pointer-events-none select-none z-[1]"
+      className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-[1]"
       style={{
-        height: isMobile
-          ? `${dimensions.heightPercentMobile}%`
-          : `${dimensions.heightPercentDesktop}%`,
-        maxHeight: isMobile
-          ? `${dimensions.maxHeightMobilePx}px`
-          : `${dimensions.maxHeightDesktopPx}px`,
-        minHeight: isMobile ? '160px' : `${dimensions.minHeightDesktopPx}px`,
-        // Upward gradient mask fades seamlessly into charcoal
-        maskImage: `linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) ${dimensions.maskStopSolid}, rgba(0,0,0,0.3) ${dimensions.maskStopMid}, rgba(0,0,0,0) ${dimensions.maskStopTop})`,
-        WebkitMaskImage: `linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) ${dimensions.maskStopSolid}, rgba(0,0,0,0.3) ${dimensions.maskStopMid}, rgba(0,0,0,0) ${dimensions.maskStopTop})`,
-        opacity: isReducedMotion ? accessibility.reducedMotionOpacity : 1,
+        // Upward gentle gradient mask near top so it blends smoothly under road ticker
+        maskImage: `linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${dimensions.maskStopSolid}, rgba(0,0,0,0.5) ${dimensions.maskStopMid}, rgba(0,0,0,0) ${dimensions.maskStopTop})`,
+        WebkitMaskImage: `linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ${dimensions.maskStopSolid}, rgba(0,0,0,0.5) ${dimensions.maskStopMid}, rgba(0,0,0,0) ${dimensions.maskStopTop})`,
+        opacity: isReducedMotion ? accessibility.reducedMotionOpacity : (FOOTER_SCENE_CONFIG.sceneOpacity ?? 0.82),
       }}
       aria-hidden="true"
     >
-      {/* Entrance Rise & Fade Transition Container */}
+      {/* Entrance Container */}
       <div
         className="relative w-full h-full"
         style={{
-          transform: isReducedMotion
-            ? 'none'
-            : hasEntered
-            ? 'translateY(0)'
-            : 'translateY(35px)',
-          opacity: isReducedMotion ? 1 : hasEntered ? 1 : 0,
-          transition: isReducedMotion
-            ? 'none'
-            : 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease',
+          transform: 'translateY(0)',
+          opacity: 1,
         }}
       >
         {/* ============================================================ */}
@@ -185,7 +171,7 @@ export default function FooterScene() {
         </div>
 
         {/* ============================================================ */}
-        {/* LAYER 3: THE SHOP (Awning, Windows, Homers Neon, Bulbs)      */}
+        {/* LAYER 3: THE SHOP BUILDING (Grand Facade, Awning, Windows)   */}
         {/* ============================================================ */}
         <div className="absolute inset-0 w-full h-full will-change-transform" style={{ transform: shopTransform }}>
           <SceneShop
@@ -197,7 +183,7 @@ export default function FooterScene() {
         </div>
 
         {/* ============================================================ */}
-        {/* LAYER 4: CHARCOAL GRILL (Flames, Patty Flip, Sparks, Smoke)  */}
+        {/* LAYER 4: CHARCOAL GRILL (Left Flank: Flames, Patty Flip)     */}
         {/* ============================================================ */}
         <div className="absolute inset-0 w-full h-full will-change-transform" style={{ transform: grillTransform }}>
           <SceneGrill
@@ -205,11 +191,12 @@ export default function FooterScene() {
             isReducedMotion={isReducedMotion}
             isMobile={isMobile}
             mousePos={mouseOffset}
+            offsetX={-365}
           />
         </div>
 
         {/* ============================================================ */}
-        {/* LAYER 5: SEASONING (Chicken-Salt Shaker & Chips Basket)      */}
+        {/* LAYER 4: SEASONING (Left Flank: Shaker & Chips Basket)       */}
         {/* ============================================================ */}
         {!isMobile && (
           <div className="absolute inset-0 w-full h-full will-change-transform" style={{ transform: foregroundTransform }}>
@@ -217,52 +204,16 @@ export default function FooterScene() {
               isPlaying={isPlaying}
               isReducedMotion={isReducedMotion}
               isMobile={isMobile}
+              offsetX={-395}
             />
           </div>
         )}
 
-        {/* ============================================================ */}
-        {/* LAYER 6: ORDER TICKETS (Floating Paper Slips)                */}
-        {/* ============================================================ */}
-        <div className="absolute inset-0 w-full h-full will-change-transform" style={{ transform: shopTransform }}>
-          <FloatingTickets
-            isPlaying={isPlaying}
-            isReducedMotion={isReducedMotion}
-            isMobile={isMobile}
-          />
-        </div>
-
-        {/* ============================================================ */}
-        {/* LAYER 7: ROAD & DELIVERY SCOOTER (Outbound & Return)         */}
-        {/* ============================================================ */}
-        <div className="absolute inset-0 w-full h-full will-change-transform" style={{ transform: foregroundTransform }}>
-          <SceneDelivery
-            isPlaying={isPlaying}
-            isReducedMotion={isReducedMotion}
-            isMobile={isMobile}
-          />
-        </div>
-
-        {/* ============================================================ */}
-        {/* LAYER 8: AMBIENT HEARTH GLOW & DAY-NIGHT BREATHING           */}
-        {/* ============================================================ */}
-        <div
-          className="absolute inset-0 w-full h-full pointer-events-none mix-blend-screen"
-          style={{
-            background: 'radial-gradient(circle at 45% 85%, rgba(232, 112, 10, 0.35) 0%, rgba(251, 191, 36, 0.12) 30%, rgba(23, 17, 13, 0) 70%)',
-            animation: (!isReducedMotion && isPlaying)
-              ? `ambientGlowPulse ${lighting.radialGlowPeriod}s ease-in-out infinite alternate, dayNightCycle ${lighting.dayNightCyclePeriod}s ease-in-out infinite alternate`
-              : 'none',
-          }}
-        />
-
-        {/* ============================================================ */}
-        {/* CONTRAST SCRIM: Dark gradient ensuring WCAG AA Readability   */}
-        {/* ============================================================ */}
+        {/* CONTRAST SCRIM: Dark gradient ensuring WCAG AA Readability */}
         <div
           className="absolute inset-0 w-full h-full pointer-events-none"
           style={{
-            background: 'linear-gradient(to top, rgba(23, 17, 13, 0.15) 0%, rgba(23, 17, 13, 0.5) 50%, rgba(23, 17, 13, 0.85) 100%)',
+            background: 'linear-gradient(to top, rgba(23, 16, 11, 0.4) 0%, rgba(23, 16, 11, 0.2) 60%, rgba(23, 16, 11, 0.7) 100%)',
             opacity: lighting.scrimOverlayDarkness,
           }}
         />

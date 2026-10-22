@@ -20,6 +20,7 @@ import CateringPage from './pages/CateringPage';
 import OrderOnlinePage from './pages/OrderOnlinePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import TechnologyPartnerPage from './pages/TechnologyPartnerPage';
 import { CARD_THEME } from './config';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -167,6 +168,7 @@ export default function App() {
             />
             <Route path="/about-us" element={<AboutPage />} />
             <Route path="/contact-us" element={<ContactPage />} />
+            <Route path="/technology-partner" element={<TechnologyPartnerPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>

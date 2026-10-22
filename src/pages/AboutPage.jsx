@@ -14,7 +14,7 @@ export default function AboutPage() {
         badgeIcon={Heart}
         badgeText="Family Tradition Since Day One"
         title="Our 10+ Year Story"
-        subtitle="More than just a local takeaway — a beloved culinary haven rooted in family recipes, generous portions, and unwavering dedication to the Emerton community."
+        subtitle="More than just a local takeaway, a beloved culinary haven rooted in family recipes, generous portions, and unwavering dedication to the Emerton community."
         className="py-16 px-4 sm:px-6 text-center"
       />
 
@@ -95,7 +95,7 @@ export default function AboutPage() {
             <Award className="w-10 h-10 text-amber-400 mb-4" />
             <h3 className="font-serif font-bold text-2xl text-cream mb-2">Generous Portions</h3>
             <p className="text-xs sm:text-sm text-cream/70 leading-relaxed">
-              We believe in honest Australian takeaway value. Nobody leaves Homers hungry — that’s our promise.
+              We believe in honest Australian takeaway value. Nobody leaves Homers hungry, that’s our promise.
             </p>
           </div>
           <div className="p-8 rounded-[24px] bg-charcoal-50 border border-cream/10 shadow-warm">

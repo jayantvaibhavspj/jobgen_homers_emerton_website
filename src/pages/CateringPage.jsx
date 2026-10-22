@@ -17,14 +17,14 @@ export default function CateringPage() {
   });
 
   const cateringOptions = [
-    { id: 'salad-caesar', name: 'Fresh Caesar Salad Tray', price: 65.00, serves: 'Serves 15–20', type: 'Salads' },
-    { id: 'salad-greek', name: 'Traditional Greek Feta Salad Tray', price: 60.00, serves: 'Serves 15–20', type: 'Salads' },
-    { id: 'salad-coleslaw', name: 'Creamy Crunchy Coleslaw Tray', price: 55.00, serves: 'Serves 15–20', type: 'Salads' },
-    { id: 'roast-chicken', name: 'Seasoned Roast Chicken Platter (5 Whole Chickens, Quartered)', price: 95.00, serves: 'Serves 15–20', type: 'Hot Meats' },
-    { id: 'roast-pork', name: 'Crispy Crackling Roast Pork Tray with Gravy', price: 120.00, serves: 'Serves 15–20', type: 'Hot Meats' },
-    { id: 'roast-beef', name: 'Slow-Roast Tender Beef in Pan Gravy', price: 115.00, serves: 'Serves 15–20', type: 'Hot Meats' },
-    { id: 'finger-food', name: 'Golden Hot Bites Platter (Potato Scallops, Calamari, Battered Savs)', price: 75.00, serves: 'Serves 20–25', type: 'Finger Food' },
-    { id: 'chips-tray', name: 'Mega Deep-Dish Hot Chips with Chicken Salt', price: 45.00, serves: 'Serves 20–25', type: 'Sides' },
+    { id: 'salad-caesar', name: 'Fresh Caesar Salad Tray', price: 65.00, serves: 'Serves 15-20', type: 'Salads' },
+    { id: 'salad-greek', name: 'Traditional Greek Feta Salad Tray', price: 60.00, serves: 'Serves 15-20', type: 'Salads' },
+    { id: 'salad-coleslaw', name: 'Creamy Crunchy Coleslaw Tray', price: 55.00, serves: 'Serves 15-20', type: 'Salads' },
+    { id: 'roast-chicken', name: 'Seasoned Roast Chicken Platter (5 Whole Chickens, Quartered)', price: 95.00, serves: 'Serves 15-20', type: 'Hot Meats' },
+    { id: 'roast-pork', name: 'Crispy Crackling Roast Pork Tray with Gravy', price: 120.00, serves: 'Serves 15-20', type: 'Hot Meats' },
+    { id: 'roast-beef', name: 'Slow-Roast Tender Beef in Pan Gravy', price: 115.00, serves: 'Serves 15-20', type: 'Hot Meats' },
+    { id: 'finger-food', name: 'Golden Hot Bites Platter (Potato Scallops, Calamari, Battered Savs)', price: 75.00, serves: 'Serves 20-25', type: 'Finger Food' },
+    { id: 'chips-tray', name: 'Mega Deep-Dish Hot Chips with Chicken Salt', price: 45.00, serves: 'Serves 20-25', type: 'Sides' },
   ];
 
   const handleTrayChange = (id, delta) => {

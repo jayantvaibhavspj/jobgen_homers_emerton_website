@@ -13,6 +13,7 @@ export default function SceneSeasoning({
   isPlaying = true,
   isReducedMotion = false,
   isMobile = false,
+  offsetX = 0,
 }) {
   const { seasoning } = FOOTER_SCENE_CONFIG;
   const [isShaking, setIsShaking] = useState(false);
@@ -21,7 +22,6 @@ export default function SceneSeasoning({
   useEffect(() => {
     if (!isPlaying || isReducedMotion) return;
 
-    // Trigger seasoning shake
     const triggerShake = () => {
       setIsShaking(true);
       setTimeout(() => {
@@ -29,7 +29,6 @@ export default function SceneSeasoning({
       }, seasoning.shakeDuration * 1000);
     };
 
-    // Stagger initial shake slightly so it doesn't align identically with patty flip
     const initialTimeout = setTimeout(() => {
       triggerShake();
       timerRef.current = setInterval(triggerShake, seasoning.interval);
@@ -41,28 +40,28 @@ export default function SceneSeasoning({
     };
   }, [isPlaying, isReducedMotion, seasoning.interval, seasoning.shakeDuration]);
 
-  // Generate deterministic falling chicken-salt specks
+  // Generate deterministic falling chicken-salt specks around counter height (y ~ 405)
   const saltSpecks = [
-    { x: 630, y: 250, r: 1.0, delay: 0.1, color: '#f59e0b' },
-    { x: 633, y: 251, r: 0.8, delay: 0.15, color: '#fffbeb' },
-    { x: 627, y: 250, r: 1.1, delay: 0.22, color: '#fbbf24' },
-    { x: 631, y: 252, r: 0.9, delay: 0.28, color: '#f59e0b' },
-    { x: 635, y: 250, r: 1.2, delay: 0.35, color: '#fffbeb' },
-    { x: 629, y: 251, r: 0.8, delay: 0.42, color: '#fbbf24' },
-    { x: 632, y: 250, r: 1.0, delay: 0.50, color: '#f59e0b' },
-    { x: 628, y: 252, r: 0.9, delay: 0.58, color: '#fffbeb' },
-    { x: 634, y: 251, r: 1.1, delay: 0.65, color: '#fbbf24' },
-    { x: 630, y: 250, r: 0.8, delay: 0.72, color: '#f59e0b' },
-    { x: 626, y: 252, r: 1.0, delay: 0.80, color: '#fbbf24' },
-    { x: 633, y: 250, r: 0.9, delay: 0.88, color: '#fffbeb' },
+    { x: 630, y: 405, r: 1.0, delay: 0.1, color: '#f59e0b' },
+    { x: 633, y: 406, r: 0.8, delay: 0.15, color: '#fffbeb' },
+    { x: 627, y: 405, r: 1.1, delay: 0.22, color: '#fbbf24' },
+    { x: 631, y: 407, r: 0.9, delay: 0.28, color: '#f59e0b' },
+    { x: 635, y: 405, r: 1.2, delay: 0.35, color: '#fffbeb' },
+    { x: 629, y: 406, r: 0.8, delay: 0.42, color: '#fbbf24' },
+    { x: 632, y: 405, r: 1.0, delay: 0.50, color: '#f59e0b' },
+    { x: 628, y: 407, r: 0.9, delay: 0.58, color: '#fffbeb' },
+    { x: 634, y: 406, r: 1.1, delay: 0.65, color: '#fbbf24' },
+    { x: 630, y: 405, r: 0.8, delay: 0.72, color: '#f59e0b' },
+    { x: 626, y: 407, r: 1.0, delay: 0.80, color: '#fbbf24' },
+    { x: 633, y: 405, r: 0.9, delay: 0.88, color: '#fffbeb' },
   ];
 
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden" aria-hidden="true">
       <svg
         className="w-full h-full"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="xMidYBottom slice"
+        viewBox="0 0 1440 520"
+        preserveAspectRatio="xMidYTop slice"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -83,48 +82,56 @@ export default function SceneSeasoning({
           </radialGradient>
         </defs>
 
-        {/* Counter area (x: 615 to 660, y: 255 to 276) */}
-        <g id="seasoning-station">
+        {/* Counter area (x: 612 to 670, y: 405 to 445) */}
+        <g id="seasoning-station" transform={`translate(${offsetX}, 0)`}>
+          {/* Dedicated Prep Table Stand (Legs down to curb at y: 445) */}
+          <g id="prep-table">
+            <rect x="612" y="429" width="56" height="3" rx="1" fill="#2d1c13" stroke="#422a1d" strokeWidth="0.8" />
+            <line x1="616" y1="432" x2="614" y2="445" stroke="#1c120c" strokeWidth="2.5" strokeLinecap="round" />
+            <line x1="664" y1="432" x2="666" y2="445" stroke="#1c120c" strokeWidth="2.5" strokeLinecap="round" />
+            <line x1="615" y1="439" x2="665" y2="439" stroke="#251810" strokeWidth="1.5" />
+          </g>
+
           {/* Wire Basket of Fresh Hot Chips */}
           <g id="chips-basket">
             {/* Ambient warmth */}
-            <circle cx="628" cy="265" r="14" fill="url(#chipsGlowGrad)" />
+            <circle cx="628" cy="420" r="14" fill="url(#chipsGlowGrad)" />
 
             {/* Wire basket frame */}
-            <rect x="618" y="260" width="22" height="14" rx="2" fill="#22160e" stroke="#523929" strokeWidth="1" />
+            <rect x="618" y="415" width="22" height="14" rx="2" fill="#22160e" stroke="#523929" strokeWidth="1" />
             {/* Basket wire grid mesh */}
-            <line x1="623" y1="260" x2="623" y2="274" stroke="#523929" strokeWidth="0.8" />
-            <line x1="629" y1="260" x2="629" y2="274" stroke="#523929" strokeWidth="0.8" />
-            <line x1="635" y1="260" x2="635" y2="274" stroke="#523929" strokeWidth="0.8" />
-            {/* Basket handle */}
-            <line x1="618" y1="262" x2="611" y2="258" stroke="#523929" strokeWidth="1.2" strokeLinecap="round" />
+            <line x1="623" y1="415" x2="623" y2="429" stroke="#523929" strokeWidth="0.8" />
+            <line x1="629" y1="415" x2="629" y2="429" stroke="#523929" strokeWidth="0.8" />
+            <line x1="635" y1="415" x2="635" y2="429" stroke="#523929" strokeWidth="0.8" />
+            {/* Basket upright wire handle (self-contained, does not poke towards grill) */}
+            <path d="M 618 418 Q 613 414 615 408" fill="none" stroke="#523929" strokeWidth="1.2" strokeLinecap="round" />
 
             {/* Golden Cut Hot Chips popping out */}
             <g strokeLinecap="round">
-              <line x1="621" y1="260" x2="623" y2="252" stroke="#f59e0b" strokeWidth="2.4" />
-              <line x1="625" y1="261" x2="627" y2="249" stroke="#fbbf24" strokeWidth="2.2" />
-              <line x1="629" y1="260" x2="631" y2="251" stroke="#f59e0b" strokeWidth="2.4" />
-              <line x1="633" y1="261" x2="636" y2="253" stroke="#fbbf24" strokeWidth="2.2" />
-              <line x1="627" y1="258" x2="634" y2="255" stroke="#d97706" strokeWidth="2" />
+              <line x1="621" y1="415" x2="623" y2="407" stroke="#f59e0b" strokeWidth="2.4" />
+              <line x1="625" y1="416" x2="627" y2="404" stroke="#fbbf24" strokeWidth="2.2" />
+              <line x1="629" y1="415" x2="631" y2="406" stroke="#f59e0b" strokeWidth="2.4" />
+              <line x1="633" y1="416" x2="636" y2="408" stroke="#fbbf24" strokeWidth="2.2" />
+              <line x1="627" y1="413" x2="634" y2="410" stroke="#d97706" strokeWidth="2" />
             </g>
           </g>
 
-          {/* Aussie Chicken-Salt Shaker */}
+          {/* Aussie Chicken-Salt Shaker (spaced comfortably away from the chips basket) */}
           <g
             id="salt-shaker"
             style={{
-              transformOrigin: '646px 266px',
+              transformOrigin: '654px 421px',
               animation: (!isReducedMotion && isShaking)
                 ? 'shakerTiltShake 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards'
                 : 'none',
             }}
           >
             {/* Shaker body */}
-            <rect x="642" y="250" width="11" height="18" rx="2" fill="url(#shakerMetalGrad)" stroke="#2d1c13" strokeWidth="0.8" />
+            <rect x="649" y="405" width="11" height="18" rx="2" fill="url(#shakerMetalGrad)" stroke="#2d1c13" strokeWidth="0.8" />
             {/* Domed perforated shaker lid */}
-            <path d="M 642 250 Q 647.5 245 653 250 Z" fill="#bfa595" stroke="#2d1c13" strokeWidth="0.8" />
+            <path d="M 649 405 Q 654.5 400 660 405 Z" fill="#bfa595" stroke="#2d1c13" strokeWidth="0.8" />
             {/* Shaker handle loop */}
-            <path d="M 653 253 Q 657 259 653 264" fill="none" stroke="#8d6e5c" strokeWidth="1" />
+            <path d="M 660 408 Q 664 414 660 419" fill="none" stroke="#8d6e5c" strokeWidth="1" />
           </g>
 
           {/* Raining Salt Specks Shower */}
@@ -154,31 +161,24 @@ export default function SceneSeasoning({
             transform: rotate(0deg) translate(0, 0);
           }
           20% {
-            /* Tilt over basket */
-            transform: rotate(-44deg) translate(-10px, -6px);
+            transform: rotate(-44deg) translate(-14px, -6px);
           }
           32% {
-            /* Shake 1 */
-            transform: rotate(-52deg) translate(-12px, -8px);
+            transform: rotate(-52deg) translate(-16px, -8px);
           }
           44% {
-            /* Rebound */
-            transform: rotate(-40deg) translate(-9px, -5px);
+            transform: rotate(-40deg) translate(-13px, -5px);
           }
           56% {
-            /* Shake 2 */
-            transform: rotate(-50deg) translate(-12px, -7px);
+            transform: rotate(-50deg) translate(-16px, -7px);
           }
           68% {
-            /* Shake 3 */
-            transform: rotate(-42deg) translate(-9px, -5px);
+            transform: rotate(-42deg) translate(-13px, -5px);
           }
           85% {
-            /* Returning */
-            transform: rotate(-10deg) translate(-2px, -1px);
+            transform: rotate(-10deg) translate(-3px, -1px);
           }
           100% {
-            /* Upright resting */
             transform: rotate(0deg) translate(0, 0);
           }
         }

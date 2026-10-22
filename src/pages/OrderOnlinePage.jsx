@@ -41,7 +41,7 @@ export default function OrderOnlinePage({ onOpenCart }) {
                 </h2>
                 <p className="card-box-body text-xs sm:text-sm leading-relaxed mb-6">
                   Build your cart right here on our website and send directly to our kitchen via WhatsApp or call us.
-                  Ready in 15–20 minutes, piping hot!
+                  Ready in 15-20 minutes, piping hot!
                 </p>
 
                 <div className="space-y-2.5 text-xs card-box-body mb-6">
@@ -97,7 +97,7 @@ export default function OrderOnlinePage({ onOpenCart }) {
                 <div className="space-y-2.5 text-xs card-box-body mb-6">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-charcoal/40 flex-shrink-0" />
-                    <span>Delivered in 25–40 minutes</span>
+                    <span>Delivered in 25-40 minutes</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-charcoal/40 flex-shrink-0" />

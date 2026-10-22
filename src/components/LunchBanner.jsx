@@ -3,7 +3,7 @@ import { Sparkles, Clock, Flame, ArrowRight } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 
 export default function LunchBanner({ onOpenSpecials, onOpenMenu }) {
-  const [timeLeft, setTimeLeft] = useState('Daily 11:00 AM – 2:00 PM');
+  const [timeLeft, setTimeLeft] = useState('Daily 11:00 AM - 2:00 PM');
   const handleOpen = onOpenSpecials || onOpenMenu;
 
   // Compute remaining time until lunch finish (2:00 PM)
@@ -19,7 +19,7 @@ export default function LunchBanner({ onOpenSpecials, onOpenMenu }) {
         const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         setTimeLeft(`${hours}h ${mins}m remaining`);
       } else {
-        setTimeLeft('Daily 11:00 AM – 2:00 PM');
+        setTimeLeft('Daily 11:00 AM - 2:00 PM');
       }
     };
 
