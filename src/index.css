@@ -10,6 +10,69 @@
     --color-chilli: #c7341c;
   }
 
+  /* ========================================================
+     CARD SURFACE DESIGN TOKENS (Warm / Dark System)
+     ======================================================== */
+  :root, [data-card-theme="warm"] {
+    --card-bg: linear-gradient(180deg, #f3e9dc 0%, #ece0d0 100%);
+    --card-bg-flat: #f1e6d8;
+    --card-border: 1px solid rgba(232, 113, 10, 0.18);
+    --card-border-color: rgba(232, 113, 10, 0.18);
+    --card-border-hover: rgba(232, 113, 10, 0.45);
+    --card-shadow: 0 10px 30px rgba(60, 35, 10, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    --card-shadow-hover: 0 16px 36px rgba(60, 35, 10, 0.16), 0 4px 12px rgba(232, 112, 10, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    --card-text-heading: #1c1511;
+    --card-text-body: #44352b;
+    --card-text-muted: #645244;
+    --card-icon-ring-bg: rgba(232, 113, 10, 0.12);
+    --card-icon-ring-border: rgba(232, 113, 10, 0.28);
+    --card-icon-ring-text: #b84e00;
+    --card-num-badge-bg: #1c1511;
+    --card-num-badge-text: #ffffff;
+    --card-chip-bg: rgba(232, 113, 10, 0.12);
+    --card-chip-border: rgba(232, 113, 10, 0.28);
+    --card-chip-text: #b84e00;
+    --card-inner-box-bg: rgba(255, 255, 255, 0.65);
+    --card-inner-box-border: rgba(60, 35, 10, 0.12);
+    --card-action-btn-bg: #1c1511;
+    --card-action-btn-text: #ffffff;
+    --card-action-btn-hover-bg: #e8700a;
+    --card-action-btn-hover-text: #ffffff;
+    --card-input-bg: rgba(255, 255, 255, 0.75);
+    --card-input-border: rgba(60, 35, 10, 0.18);
+    --card-input-text: #1c1511;
+  }
+
+  [data-card-theme="dark"] {
+    --card-bg: linear-gradient(180deg, #2a1f18 0%, #1c1511 100%);
+    --card-bg-flat: #221a14;
+    --card-border: 1px solid rgba(255, 255, 255, 0.08);
+    --card-border-color: rgba(255, 255, 255, 0.08);
+    --card-border-hover: rgba(232, 113, 10, 0.65);
+    --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    --card-shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(232, 113, 10, 0.25);
+    --card-text-heading: #faf6f0;
+    --card-text-body: rgba(250, 246, 240, 0.82);
+    --card-text-muted: rgba(250, 246, 240, 0.65);
+    --card-icon-ring-bg: rgba(255, 255, 255, 0.08);
+    --card-icon-ring-border: rgba(232, 113, 10, 0.4);
+    --card-icon-ring-text: #ff8a1f;
+    --card-num-badge-bg: #e8700a;
+    --card-num-badge-text: #ffffff;
+    --card-chip-bg: rgba(232, 113, 10, 0.22);
+    --card-chip-border: rgba(232, 113, 10, 0.45);
+    --card-chip-text: #ff9d42;
+    --card-inner-box-bg: rgba(255, 255, 255, 0.07);
+    --card-inner-box-border: rgba(255, 255, 255, 0.12);
+    --card-action-btn-bg: #e8700a;
+    --card-action-btn-text: #ffffff;
+    --card-action-btn-hover-bg: #ff8a1f;
+    --card-action-btn-hover-text: #ffffff;
+    --card-input-bg: rgba(28, 21, 17, 0.85);
+    --card-input-border: rgba(255, 255, 255, 0.15);
+    --card-input-text: #faf6f0;
+  }
+
   html {
     color-scheme: dark light;
     scroll-behavior: smooth;
@@ -109,6 +172,7 @@ html.lenis, html.lenis body {
 .animate-marquee {
   display: flex;
   width: max-content;
+  will-change: transform;
   animation: marqueeScroll 25s linear infinite;
 }
 
@@ -148,5 +212,98 @@ html.lenis, html.lenis body {
 .scrollbar-none {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
+}
+
+/* Custom Sleek Dark/Warm Scrollbar for Modals & Scroll Containers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(23, 21, 19, 0.5);
+  border-radius: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(217, 83, 30, 0.65);
+  border-radius: 8px;
+  border: 1px solid rgba(23, 21, 19, 0.3);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 83, 30, 0.95);
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 83, 30, 0.65) rgba(23, 21, 19, 0.5);
+  overscroll-behavior: contain;
+}
+
+/* ========================================================
+   CARD SURFACE UTILITY CLASSES & THEME BEHAVIOR
+   ======================================================== */
+.card-box {
+  background: var(--card-bg) !important;
+  border: var(--card-border) !important;
+  box-shadow: var(--card-shadow) !important;
+  color: var(--card-text-body) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.card-box:hover {
+  border-color: var(--card-border-hover) !important;
+  box-shadow: var(--card-shadow-hover) !important;
+}
+
+.card-box.active-card {
+  border-color: var(--card-border-hover) !important;
+  box-shadow: var(--card-shadow-hover) !important;
+}
+
+[data-card-theme="dark"] .card-box:hover,
+[data-card-theme="dark"] .card-box.active-card {
+  border-color: rgba(232, 113, 10, 0.7) !important;
+  border-top: 2px solid #e8700a !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(232, 113, 10, 0.25) !important;
+}
+
+.card-box-heading,
+.card-box h3,
+.card-box h4 {
+  color: var(--card-text-heading) !important;
+}
+
+.card-box-body,
+.card-box p {
+  color: var(--card-text-body) !important;
+}
+
+.card-box-muted {
+  color: var(--card-text-muted) !important;
+}
+
+.card-chip {
+  background-color: var(--card-chip-bg) !important;
+  border: 1px solid var(--card-chip-border) !important;
+  color: var(--card-chip-text) !important;
+}
+
+.card-inner-box {
+  background-color: var(--card-inner-box-bg) !important;
+  border-color: var(--card-inner-box-border) !important;
+}
+
+.card-action-btn {
+  background-color: var(--card-action-btn-bg) !important;
+  color: var(--card-action-btn-text) !important;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.card-action-btn:hover {
+  background-color: var(--card-action-btn-hover-bg) !important;
+  color: var(--card-action-btn-hover-text) !important;
+}
+
+.card-input {
+  background-color: var(--card-input-bg) !important;
+  border: 1px solid var(--card-input-border) !important;
+  color: var(--card-input-text) !important;
 }
 

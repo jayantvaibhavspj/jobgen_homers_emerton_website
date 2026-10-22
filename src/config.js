@@ -4,6 +4,12 @@
  * Items marked as [PLACEHOLDER] can be replaced or extended as needed.
  */
 
+// ==========================================
+// CARD / BOX SURFACE THEME TOGGLE
+// Options: "warm" | "dark" (Default: "warm")
+// ==========================================
+export const CARD_THEME = "warm";
+
 export const SHOP_INFO = {
   name: "Homers Emerton",
   shortName: "Homers",
@@ -960,24 +966,32 @@ export const MENU_ITEMS = [
 export const CUSTOMER_REVIEWS = [
   {
     name: "Tanielu Pula",
+    avatar: "/avatars/tanielu.jpg",
+    initials: "TP",
     rating: 5,
     date: "Local Guide",
     comment: "Good service, staff are always friendly and patient. The burgers are always hot, fresh and huge!",
   },
   {
     name: "Kylie Seaton",
+    avatar: "/avatars/kylie.jpg",
+    initials: "KS",
     rating: 5,
     date: "Verified Customer",
     comment: "The crumbed fish is our absolute favourite, tender and fresh. Chicken Caesar Salad has heaps of chicken and the chips are delish!",
   },
   {
     name: "Madie Black",
+    avatar: "/avatars/madie.jpg",
+    initials: "MB",
     rating: 5,
     date: "Local Regular",
     comment: "The team is lovely, very patient whilst we ordered. Great customer service and consistently amazing food every single time.",
   },
   {
     name: "Vicki Lala",
+    avatar: "/avatars/vicki.jpg",
+    initials: "VL",
     rating: 5,
     date: "10-Year Customer",
     comment: "Been eating at Homers for easily 10 years. Only place in western Sydney I trust for top quality seafood and roasts!",

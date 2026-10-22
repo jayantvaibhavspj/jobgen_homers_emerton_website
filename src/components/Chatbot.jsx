@@ -18,6 +18,162 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
   ]);
   const messagesEndRef = useRef(null);
 
+  // DRAGGABLE FLOATING BUTTON STATE & LOGIC
+  const BUTTON_SIZE = 64;
+  const MARGIN = 14;
+
+  const clampPosition = (x, y) => {
+    if (typeof window === 'undefined') return { x, y };
+    const maxX = Math.max(MARGIN, window.innerWidth - BUTTON_SIZE - MARGIN);
+    const maxY = Math.max(MARGIN, window.innerHeight - BUTTON_SIZE - MARGIN);
+    return {
+      x: Math.min(Math.max(MARGIN, x), maxX),
+      y: Math.min(Math.max(MARGIN, y), maxY),
+    };
+  };
+
+  const getInitialPosition = () => {
+    if (typeof window === 'undefined') return { x: 100, y: 100 };
+    const isMobile = window.innerWidth < 1024;
+    const rightMargin = window.innerWidth < 640 ? 16 : 24;
+    const bottomMargin = isMobile ? 84 : 28;
+    return clampPosition(
+      window.innerWidth - BUTTON_SIZE - rightMargin,
+      window.innerHeight - BUTTON_SIZE - bottomMargin
+    );
+  };
+
+  const [position, setPosition] = useState(getInitialPosition);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const dragRef = useRef({
+    isMouseDown: false,
+    startX: 0,
+    startY: 0,
+    initialX: 0,
+    initialY: 0,
+    hasMoved: false,
+    justDragged: false,
+  });
+
+  // Clamp position on window resize or zoom in/out so it NEVER leaves the screen
+  useEffect(() => {
+    const handleViewportChange = () => {
+      setPosition((prev) => clampPosition(prev.x, prev.y));
+    };
+
+    window.addEventListener('resize', handleViewportChange);
+    window.visualViewport?.addEventListener('resize', handleViewportChange);
+
+    return () => {
+      window.removeEventListener('resize', handleViewportChange);
+      window.visualViewport?.removeEventListener('resize', handleViewportChange);
+    };
+  }, []);
+
+  // Global mousemove & mouseup listeners for smooth dragging outside element bounds
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!dragRef.current.isMouseDown) return;
+      const dx = e.clientX - dragRef.current.startX;
+      const dy = e.clientY - dragRef.current.startY;
+
+      if (!dragRef.current.hasMoved && Math.hypot(dx, dy) > 4) {
+        dragRef.current.hasMoved = true;
+        dragRef.current.justDragged = true;
+        setIsDragging(true);
+      }
+
+      if (dragRef.current.hasMoved) {
+        setPosition(clampPosition(dragRef.current.initialX + dx, dragRef.current.initialY + dy));
+      }
+    };
+
+    const handleMouseUp = () => {
+      if (dragRef.current.isMouseDown) {
+        dragRef.current.isMouseDown = false;
+        setIsDragging(false);
+        // small timeout to suppress click event if user was dragging
+        setTimeout(() => {
+          dragRef.current.justDragged = false;
+        }, 120);
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (!dragRef.current.isMouseDown || !e.touches[0]) return;
+      const touch = e.touches[0];
+      const dx = touch.clientX - dragRef.current.startX;
+      const dy = touch.clientY - dragRef.current.startY;
+
+      if (!dragRef.current.hasMoved && Math.hypot(dx, dy) > 4) {
+        dragRef.current.hasMoved = true;
+        dragRef.current.justDragged = true;
+        setIsDragging(true);
+      }
+
+      if (dragRef.current.hasMoved) {
+        setPosition(clampPosition(dragRef.current.initialX + dx, dragRef.current.initialY + dy));
+        e.preventDefault(); // Prevent page scroll while dragging button
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if (dragRef.current.isMouseDown) {
+        dragRef.current.isMouseDown = false;
+        setIsDragging(false);
+        setTimeout(() => {
+          dragRef.current.justDragged = false;
+        }, 120);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('touchcancel', handleTouchEnd);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('touchcancel', handleTouchEnd);
+    };
+  }, []);
+
+  const handleStartDrag = (clientX, clientY) => {
+    dragRef.current = {
+      isMouseDown: true,
+      startX: clientX,
+      startY: clientY,
+      initialX: position.x,
+      initialY: position.y,
+      hasMoved: false,
+      justDragged: false,
+    };
+  };
+
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return; // Left click only
+    handleStartDrag(e.clientX, e.clientY);
+  };
+
+  const handleTouchStart = (e) => {
+    if (!e.touches[0]) return;
+    handleStartDrag(e.touches[0].clientX, e.touches[0].clientY);
+  };
+
+  const handleOpenClick = (e) => {
+    if (dragRef.current.justDragged) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    handleOpen();
+  };
+
   // Auto-scroll to bottom of chat
   useEffect(() => {
     if (isOpen) {
@@ -25,18 +181,9 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
     }
   }, [messages, isOpen]);
 
-  // Hide bubble after 10s or when opened
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBubble(false);
-    }, 12000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const handleOpen = () => {
     setIsOpen(true);
     setHasUnread(false);
-    setShowBubble(false);
   };
 
   const quickPrompts = [
@@ -159,60 +306,141 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
     }, 400);
   };
 
+  // Determine popup placement so it never clips off-screen when moved near edges
+  const isNearTop = position.y < 70;
+  const isNearLeft = position.x < 170;
+
+  // Calculate modal coordinates to stay cleanly on screen anchored to button
+  const modalWidth = typeof window !== 'undefined' ? Math.min(window.innerWidth - 24, 380) : 380;
+  const modalHeight = typeof window !== 'undefined' ? Math.min(window.innerHeight - 24, 520) : 520;
+
+  let modalLeft = position.x - modalWidth + BUTTON_SIZE;
+  if (modalLeft < 12) modalLeft = position.x;
+  if (typeof window !== 'undefined' && modalLeft + modalWidth > window.innerWidth - 12) {
+    modalLeft = window.innerWidth - modalWidth - 12;
+  }
+  if (modalLeft < 12) modalLeft = 12;
+
+  let modalTop = position.y - modalHeight - 12;
+  if (modalTop < 12) {
+    modalTop = position.y + BUTTON_SIZE + 12;
+  }
+  if (typeof window !== 'undefined' && modalTop + modalHeight > window.innerHeight - 12) {
+    modalTop = window.innerHeight - modalHeight - 12;
+  }
+  if (modalTop < 12) modalTop = 12;
+
   return (
-    <aside aria-label="Customer Support Assistant" className="fixed bottom-20 lg:bottom-6 right-4 sm:right-6 z-40">
-      {/* GREETING SPEECH BUBBLE TOOLTIP (When closed) */}
-      {!isOpen && showBubble && (
+    <>
+      {/* FLOATING DRAGGABLE CHATBOT TRIGGER (WHEN CLOSED) */}
+      {!isOpen && (
         <div
-          onClick={handleOpen}
-          className="absolute bottom-16 right-0 bg-charcoal text-cream border border-orange-burnt/40 px-4 py-2.5 rounded-2xl rounded-br-sm shadow-warm-lg text-xs font-medium cursor-pointer w-64 hover:border-orange-burnt transition-all animate-bounce"
+          role="region"
+          aria-label="Homers AI Assistant trigger"
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          style={{
+            position: 'fixed',
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            touchAction: 'none',
+            zIndex: 9999,
+            userSelect: 'none',
+            cursor: isDragging ? 'grabbing' : 'grab',
+            transition: isDragging ? 'none' : 'box-shadow 0.2s ease',
+          }}
+          className="group flex flex-col items-end"
         >
-          <div className="flex items-center gap-2 mb-1">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-bold text-orange-glow text-[11px]">Homers Assistant</span>
-          </div>
-          <p className="text-cream/90 leading-tight">
-            Hungry? Ask me for recommendations, lunch deals, or catering!
-          </p>
+          {/* "ASK ME!" POP-UP BUBBLE */}
+          {showBubble && (
+            <div
+              onClick={handleOpenClick}
+              title="Click to chat with Homers AI"
+              className={`absolute select-none cursor-pointer transition-all duration-300 animate-bounce pointer-events-auto ${
+                isNearTop ? 'top-18' : '-top-11'
+              } ${isNearLeft ? 'left-0' : 'right-0'}`}
+            >
+              <div className="bg-charcoal/95 backdrop-blur-md text-cream border-2 border-orange-burnt px-3 py-1.5 rounded-full shadow-2xl flex items-center gap-2 whitespace-nowrap hover:scale-105 transition-transform hover:border-amber-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span className="font-extrabold text-xs text-orange-400 tracking-wider uppercase font-serif">
+                  Ask me!
+                </span>
+                <span className="text-[11px] text-cream/90 font-medium">
+                  Deals & Menu 🍔
+                </span>
+              </div>
+              {/* Pointer arrow pointing towards the logo button */}
+              <div
+                className={`absolute w-2.5 h-2.5 bg-charcoal border-orange-burnt ${
+                  isNearTop
+                    ? '-top-1.5 border-t-2 border-l-2 rotate-45'
+                    : '-bottom-1 border-r-2 border-b-2 rotate-45'
+                } ${isNearLeft ? 'left-6' : 'right-6'}`}
+              />
+            </div>
+          )}
+
+          {/* HOMERS OFFICIAL LOGO FLOATING BUTTON */}
+          <button
+            type="button"
+            onClick={handleOpenClick}
+            aria-label="Open food chat assistant with Homers logo"
+            title="Homers Assistant — Click to chat, drag to move anywhere"
+            className={`relative flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-amber-50 via-white to-orange-100 border-[2.5px] border-orange-burnt shadow-2xl hover:shadow-[0_0_20px_rgba(217,83,30,0.6)] active:scale-95 transition-transform duration-200 focus:outline-none ${
+              isDragging ? 'scale-105 ring-4 ring-orange-burnt/40' : 'group-hover:scale-105'
+            }`}
+          >
+            {/* The Official Homers Logo */}
+            <img
+              src="/logo.png"
+              alt="Homers Emerton"
+              className="w-12 h-auto max-h-10 object-contain drop-shadow pointer-events-none select-none transition-transform group-hover:scale-110"
+              draggable="false"
+            />
+
+            {/* Live Indicator / Unread Badge */}
+            {hasUnread ? (
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-chilli text-white text-[11px] font-bold rounded-full flex items-center justify-center border-2 border-white shadow-md animate-pulse">
+                1
+              </span>
+            ) : (
+              <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white shadow-sm flex items-center justify-center">
+                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              </span>
+            )}
+          </button>
         </div>
       )}
 
-      {/* FLOATING ACTION BUTTON (FAB) */}
-      {!isOpen && (
-        <button
-          onClick={handleOpen}
-          className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-orange-burnt hover:bg-orange-600 active:scale-95 text-white shadow-warm-lg hover:shadow-glow-orange transition-all duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-burnt/50"
-          aria-label="Open food chat assistant"
-        >
-          <MessageSquare className="w-6 h-6 transition-transform group-hover:scale-110" />
-
-          {/* Unread badge */}
-          {hasUnread && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-chilli text-white text-[11px] font-bold rounded-full flex items-center justify-center border-2 border-charcoal shadow animate-pulse">
-              1
-            </span>
-          )}
-        </button>
-      )}
-
-      {/* EXPANDED CHATBOT MODAL */}
+      {/* EXPANDED CHATBOT MODAL DOCKED NEAR BUTTON */}
       {isOpen && (
         <div
           role="dialog"
           aria-label="Homers Food Assistant Chat"
-          className="w-[92vw] sm:w-[380px] h-[520px] max-h-[80vh] bg-charcoal text-cream rounded-[24px] border border-cream/15 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl animate-scale-in"
+          style={{
+            position: 'fixed',
+            left: `${modalLeft}px`,
+            top: `${modalTop}px`,
+            width: `${modalWidth}px`,
+            zIndex: 9999,
+          }}
+          className="h-[520px] max-h-[85vh] bg-charcoal text-cream rounded-[24px] border border-cream/15 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl animate-scale-in"
         >
           {/* Header */}
-          <div className="px-5 py-4 bg-charcoal-50 border-b border-cream/10 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-orange-burnt/20 border border-orange-burnt/40 flex items-center justify-center text-orange-glow">
-                <Flame className="w-5 h-5" />
+          <div className="px-4 py-3.5 bg-charcoal-50 border-b border-cream/10 flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-10 h-10 rounded-full bg-white border border-orange-burnt/40 p-1 flex items-center justify-center shadow-sm">
+                <img
+                  src="/logo.png"
+                  alt="Homers"
+                  className="w-full h-auto object-contain"
+                />
               </div>
               <div>
-                <h3 className="font-serif font-bold text-base text-cream leading-none">
+                <h3 className="font-serif font-bold text-sm sm:text-base text-cream leading-tight">
                   Homers AI Assistant
                 </h3>
-                <span className="text-[11px] text-emerald-400 flex items-center gap-1 mt-1 font-mono">
+                <span className="text-[10px] text-emerald-400 flex items-center gap-1 mt-0.5 font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   Live · Emerton Takeaway
                 </span>
@@ -315,6 +543,6 @@ export default function Chatbot({ onAddToCart, onOpenCart }) {
           </form>
         </div>
       )}
-    </aside>
+    </>
   );
 }

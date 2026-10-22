@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import Chatbot from './components/Chatbot';
 import CateringModal from './components/CateringModal';
+import LunchSpecialsModal from './components/LunchSpecialsModal';
 import ScrollToTop from './components/ScrollToTop';
 
 // Route Pages
@@ -19,6 +20,7 @@ import CateringPage from './pages/CateringPage';
 import OrderOnlinePage from './pages/OrderOnlinePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import { CARD_THEME } from './config';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,7 +37,13 @@ export default function App() {
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCateringOpen, setIsCateringOpen] = useState(false);
+  const [isSpecialsOpen, setIsSpecialsOpen] = useState(false);
   const lenisRef = useRef(null);
+
+  // Sync card surface theme attribute (warm / dark)
+  useEffect(() => {
+    document.documentElement.setAttribute('data-card-theme', CARD_THEME || 'warm');
+  }, []);
 
   // Sync cart to localStorage
   useEffect(() => {
@@ -132,6 +140,7 @@ export default function App() {
                 <HomePage
                   onAddToCart={handleAddToCart}
                   onOpenCart={() => setIsCartOpen(true)}
+                  onOpenSpecials={() => setIsSpecialsOpen(true)}
                 />
               }
             />
@@ -185,6 +194,14 @@ export default function App() {
         <CateringModal
           isOpen={isCateringOpen}
           onClose={() => setIsCateringOpen(false)}
+        />
+
+        {/* Daily Lunch Specials Modal */}
+        <LunchSpecialsModal
+          isOpen={isSpecialsOpen}
+          onClose={() => setIsSpecialsOpen(false)}
+          onAddToCart={handleAddToCart}
+          onOpenCart={() => setIsCartOpen(true)}
         />
       </div>
     </Router>

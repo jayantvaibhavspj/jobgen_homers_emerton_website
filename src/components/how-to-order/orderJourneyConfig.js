@@ -5,11 +5,11 @@
  * micro-animation delays, particle counts, and bonus feature toggles.
  */
 export const ORDER_JOURNEY_CONFIG = {
-  // Timeline Orchestration
-  triggerStart: 'top 65%',            // When the section becomes ~35% visible
-  totalDuration: 4.5,                 // Total journey animation duration (seconds)
-  cardEntranceDuration: 0.65,         // Duration for each card to spring up
-  tokenTravelDuration: 0.85,          // Time for order token to travel from card to card
+  // Timeline Orchestration (High-speed snappy delivery)
+  triggerStart: 'top 82%',            // Starts promptly when section scrolls into view
+  totalDuration: 1.8,                 // Total journey animation duration ~1.8s (was 4.5s)
+  cardEntranceDuration: 0.32,         // Punchy spring entrance (was 0.65s)
+  tokenTravelDuration: 0.36,          // Fast, dynamic order token transit (was 0.85s)
   
   // Card Visual States
   cardActiveLift: -6,                 // Card Y lift (px) when active
@@ -17,8 +17,8 @@ export const ORDER_JOURNEY_CONFIG = {
   maxTiltDeg: 4,                      // Max desktop 3D cursor tilt angle (deg)
   
   // Ambient Loops
-  energyPulseInterval: 6.0,           // Seconds between subtle connector line energy waves
-  phoneRingInterval: 4.5,             // Seconds between subtle phone wiggles
+  energyPulseInterval: 3.0,           // Seconds between subtle connector line energy waves
+  phoneRingInterval: 2.8,             // Seconds between subtle phone wiggles
   
   // Feature Toggles (Bonuses)
   features: {

@@ -185,10 +185,10 @@ export default function FindUs() {
             {CUSTOMER_REVIEWS.map((rev, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-charcoal border border-cream/10 shadow-sm flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-charcoal border border-cream/10 shadow-sm flex flex-col justify-between hover:border-orange-burnt/40 transition-colors"
               >
                 <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-2">
+                  <div className="flex items-center gap-1 text-amber-400 mb-3">
                     {[...Array(rev.rating)].map((_, i) => (
                       <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                     ))}
@@ -197,9 +197,30 @@ export default function FindUs() {
                     "{rev.comment}"
                   </p>
                 </div>
-                <div className="pt-2 border-t border-cream/10 flex items-center justify-between text-xs">
-                  <span className="font-bold text-cream">{rev.name}</span>
-                  <span className="text-orange-glow text-[11px]">{rev.date}</span>
+                <div className="pt-3 border-t border-cream/10 flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-orange-burnt/40 bg-charcoal flex-shrink-0 shadow-sm">
+                    {rev.avatar && (
+                      <img
+                        src={rev.avatar}
+                        alt={rev.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-burnt to-chilli -z-10 flex items-center justify-center font-bold text-white text-xs">
+                      {rev.initials || rev.name.charAt(0)}
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-bold text-cream text-xs sm:text-sm block truncate">
+                      {rev.name}
+                    </span>
+                    <span className="text-orange-glow text-[11px] block mt-0.5">
+                      {rev.date}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}

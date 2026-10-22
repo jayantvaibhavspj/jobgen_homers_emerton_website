@@ -115,12 +115,12 @@ export default function HowToOrder({ theme = 'light' }) {
       });
 
       // ----------------------------------------------------
-      // PHASE 1: Section Header Reveal
+      // PHASE 1: Section Header Reveal (Snappy & Energetic)
       // ----------------------------------------------------
-      tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
-        .to(headlineRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.2')
-        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }, '-=0.25')
-        .to(highlighterRef.current, { scaleX: 1, duration: 0.45, ease: 'power2.inOut' }, '-=0.1');
+      tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' })
+        .to(headlineRef.current, { opacity: 1, y: 0, duration: 0.25, ease: 'power3.out' }, '-=0.12')
+        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.22, ease: 'power2.out' }, '-=0.15')
+        .to(highlighterRef.current, { scaleX: 1, duration: 0.22, ease: 'power2.inOut' }, '-=0.1');
 
       // ----------------------------------------------------
       // PHASE 2: Step 1 "Choose Your Food" Arrival
@@ -159,26 +159,26 @@ export default function HowToOrder({ theme = 'light' }) {
         onStart: () => {
           setActiveCard(0);
         },
-      }, '+=0.1')
+      }, '+=0.04')
       .to([desktopTokenRef.current, mobileTokenRef.current], {
         opacity: 1,
         scale: 1,
-        duration: 0.25,
-      }, '-=0.4')
-      .to(numBadge1Ref.current, {
-        scale: 1.3,
         duration: 0.15,
-        yoyo: true,
-        repeat: 1,
-        ease: 'power1.out',
       }, '-=0.2')
-      .to(ring1Ref.current, {
-        scale: 1.15,
-        duration: 0.2,
+      .to(numBadge1Ref.current, {
+        scale: 1.25,
+        duration: 0.1,
         yoyo: true,
         repeat: 1,
         ease: 'power1.out',
-      }, '-=0.2');
+      }, '-=0.1')
+      .to(ring1Ref.current, {
+        scale: 1.12,
+        duration: 0.12,
+        yoyo: true,
+        repeat: 1,
+        ease: 'power1.out',
+      }, '-=0.1');
 
       // ----------------------------------------------------
       // PHASE 3: Travel to Step 2 "Send on WhatsApp or Call"
@@ -186,7 +186,7 @@ export default function HowToOrder({ theme = 'light' }) {
       tl.to(pathProgress, {
         val: 0.5,
         duration: ORDER_JOURNEY_CONFIG.tokenTravelDuration,
-        ease: 'power1.inOut',
+        ease: 'power2.inOut',
         onUpdate: () => {
           updateDesktopToken(pathProgress.val);
           updateMobileToken(0.08 + pathProgress.val * 0.84);
@@ -202,7 +202,7 @@ export default function HowToOrder({ theme = 'light' }) {
             });
           }
         },
-      }, '+=0.6')
+      }, '+=0.08')
       .to(card2Ref.current, {
         opacity: 1,
         y: ORDER_JOURNEY_CONFIG.cardActiveLift,
@@ -213,24 +213,24 @@ export default function HowToOrder({ theme = 'light' }) {
           setActiveCard(1);
           setCard1Done(true);
         },
-      }, '-=0.35')
+      }, '-=0.22')
       .to(card1Ref.current, {
         y: 0,
-        duration: 0.3,
-        ease: 'power1.out',
-      }, '-=0.35')
-      .to(numBadge2Ref.current, {
-        scale: 1.3,
-        duration: 0.15,
-        yoyo: true,
-        repeat: 1,
-      }, '-=0.2')
-      .to(ring2Ref.current, {
-        scale: 1.15,
         duration: 0.2,
+        ease: 'power1.out',
+      }, '-=0.22')
+      .to(numBadge2Ref.current, {
+        scale: 1.25,
+        duration: 0.1,
         yoyo: true,
         repeat: 1,
-      }, '-=0.2');
+      }, '-=0.1')
+      .to(ring2Ref.current, {
+        scale: 1.12,
+        duration: 0.12,
+        yoyo: true,
+        repeat: 1,
+      }, '-=0.1');
 
       // ----------------------------------------------------
       // PHASE 4: Travel to Step 3 "Collect Hot or Get Delivery"
@@ -238,7 +238,7 @@ export default function HowToOrder({ theme = 'light' }) {
       tl.to(pathProgress, {
         val: 1.0,
         duration: ORDER_JOURNEY_CONFIG.tokenTravelDuration,
-        ease: 'power1.inOut',
+        ease: 'power2.inOut',
         onUpdate: () => {
           updateDesktopToken(pathProgress.val);
           updateMobileToken(0.08 + pathProgress.val * 0.84);
@@ -254,7 +254,7 @@ export default function HowToOrder({ theme = 'light' }) {
             });
           }
         },
-      }, '+=0.7')
+      }, '+=0.08')
       .to(card3Ref.current, {
         opacity: 1,
         y: ORDER_JOURNEY_CONFIG.cardActiveLift,
@@ -265,24 +265,24 @@ export default function HowToOrder({ theme = 'light' }) {
           setActiveCard(2);
           setCard2Done(true);
         },
-      }, '-=0.35')
+      }, '-=0.22')
       .to(card2Ref.current, {
         y: 0,
-        duration: 0.3,
-        ease: 'power1.out',
-      }, '-=0.35')
-      .to(numBadge3Ref.current, {
-        scale: 1.3,
-        duration: 0.15,
-        yoyo: true,
-        repeat: 1,
-      }, '-=0.2')
-      .to(ring3Ref.current, {
-        scale: 1.15,
         duration: 0.2,
+        ease: 'power1.out',
+      }, '-=0.22')
+      .to(numBadge3Ref.current, {
+        scale: 1.25,
+        duration: 0.1,
         yoyo: true,
         repeat: 1,
-      }, '-=0.2');
+      }, '-=0.1')
+      .to(ring3Ref.current, {
+        scale: 1.12,
+        duration: 0.12,
+        yoyo: true,
+        repeat: 1,
+      }, '-=0.1');
 
       // ----------------------------------------------------
       // PHASE 5: Bonus B Kitchen Ticket Print & CTA Reveal
@@ -292,19 +292,19 @@ export default function HowToOrder({ theme = 'light' }) {
           opacity: 1,
           y: 0,
           scaleY: 1,
-          duration: 0.55,
+          duration: 0.26,
           ease: 'power2.out',
           onStart: () => {
             setCard3Done(true);
           },
-        }, '+=0.4')
+        }, '+=0.06')
         // Subtle mechanical paper jitter
         .to(ticketRef.current, {
           x: 1,
-          duration: 0.05,
+          duration: 0.03,
           yoyo: true,
-          repeat: 3,
-        }, '-=0.3');
+          repeat: 2,
+        }, '-=0.1');
       }
 
       // ----------------------------------------------------
@@ -312,16 +312,16 @@ export default function HowToOrder({ theme = 'light' }) {
       // ----------------------------------------------------
       tl.to(phoneUnderlineRef.current, {
         scaleX: 1,
-        duration: 0.45,
+        duration: 0.22,
         ease: 'power2.out',
-      }, '+=0.2')
+      }, '+=0.05')
       .to(phoneIconRef.current, {
-        rotation: 14,
-        duration: 0.1,
+        rotation: 12,
+        duration: 0.06,
         yoyo: true,
-        repeat: 3,
+        repeat: 2,
         ease: 'power1.inOut',
-      }, '-=0.2');
+      }, '-=0.1');
 
       // ----------------------------------------------------
       // AMBIENT PULSE LOOP (Runs periodically so section stays alive)

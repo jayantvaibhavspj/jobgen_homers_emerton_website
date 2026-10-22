@@ -39,14 +39,14 @@ export default function MiniCart({ isPlaying, triggerKey, isLight = true }) {
         opacity: 1,
         scale: 1,
         rotation: -6,
-        duration: 0.35,
+        duration: 0.2,
         ease: 'bounce.out',
         onComplete: () => {
           if (counterRef.current) counterRef.current.textContent = '1';
         },
       })
-      .to(basketRef.current, { scaleY: 0.92, scaleX: 1.05, duration: 0.08, yoyo: true, repeat: 1 }, '-=0.15')
-      .to(badgeRef.current, { scale: 1.3, duration: 0.1, yoyo: true, repeat: 1 }, '-=0.1');
+      .to(basketRef.current, { scaleY: 0.92, scaleX: 1.05, duration: 0.06, yoyo: true, repeat: 1 }, '-=0.1')
+      .to(badgeRef.current, { scale: 1.3, duration: 0.08, yoyo: true, repeat: 1 }, '-=0.08');
 
       // Item 2: Golden Chips Drop
       tl.to(item2Ref.current, {
@@ -54,14 +54,14 @@ export default function MiniCart({ isPlaying, triggerKey, isLight = true }) {
         opacity: 1,
         scale: 1,
         rotation: 8,
-        duration: 0.35,
+        duration: 0.2,
         ease: 'bounce.out',
         onComplete: () => {
           if (counterRef.current) counterRef.current.textContent = '2';
         },
-      }, '+=0.1')
-      .to(basketRef.current, { scaleY: 0.92, scaleX: 1.05, duration: 0.08, yoyo: true, repeat: 1 }, '-=0.15')
-      .to(badgeRef.current, { scale: 1.3, duration: 0.1, yoyo: true, repeat: 1 }, '-=0.1');
+      }, '+=0.04')
+      .to(basketRef.current, { scaleY: 0.92, scaleX: 1.05, duration: 0.06, yoyo: true, repeat: 1 }, '-=0.1')
+      .to(badgeRef.current, { scale: 1.3, duration: 0.08, yoyo: true, repeat: 1 }, '-=0.08');
 
       // Item 3: Cold Drink Drops
       tl.to(item3Ref.current, {
@@ -69,14 +69,14 @@ export default function MiniCart({ isPlaying, triggerKey, isLight = true }) {
         opacity: 1,
         scale: 1,
         rotation: -4,
-        duration: 0.35,
+        duration: 0.2,
         ease: 'bounce.out',
         onComplete: () => {
           if (counterRef.current) counterRef.current.textContent = '3';
         },
-      }, '+=0.1')
-      .to(basketRef.current, { scaleY: 0.88, scaleX: 1.08, duration: 0.1, yoyo: true, repeat: 1 }, '-=0.15')
-      .to(badgeRef.current, { scale: 1.4, duration: 0.12, yoyo: true, repeat: 1 }, '-=0.1');
+      }, '+=0.04')
+      .to(basketRef.current, { scaleY: 0.88, scaleX: 1.08, duration: 0.08, yoyo: true, repeat: 1 }, '-=0.1')
+      .to(badgeRef.current, { scale: 1.4, duration: 0.08, yoyo: true, repeat: 1 }, '-=0.08');
 
     }, containerRef);
 

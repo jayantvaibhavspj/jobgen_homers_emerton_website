@@ -57,13 +57,13 @@ export default function ContactPage() {
       <div className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-b border-charcoal/10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Address */}
-          <div className="p-8 rounded-[24px] bg-white border border-charcoal/10 shadow-warm flex flex-col justify-between">
+          <div className="p-8 rounded-[24px] card-box flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-orange-burnt/10 flex items-center justify-center text-orange-burnt mb-4">
+              <div className="w-12 h-12 rounded-2xl card-chip flex items-center justify-center mb-4">
                 <MapPin className="w-6 h-6" />
               </div>
-              <h3 className="font-serif font-bold text-xl text-charcoal mb-1">Our Location</h3>
-              <p className="text-xs sm:text-sm text-charcoal/70 leading-relaxed mb-4">
+              <h3 className="font-serif font-bold text-xl card-box-heading mb-1">Our Location</h3>
+              <p className="text-xs sm:text-sm card-box-body leading-relaxed mb-4">
                 {SHOP_INFO.address}
               </p>
             </div>
@@ -79,18 +79,18 @@ export default function ContactPage() {
           </div>
 
           {/* Card 2: Phone */}
-          <div className="p-8 rounded-[24px] bg-white border border-charcoal/10 shadow-warm flex flex-col justify-between">
+          <div className="p-8 rounded-[24px] card-box flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-orange-burnt/10 flex items-center justify-center text-orange-burnt mb-4">
+              <div className="w-12 h-12 rounded-2xl card-chip flex items-center justify-center mb-4">
                 <Phone className="w-6 h-6" />
               </div>
-              <h3 className="font-serif font-bold text-xl text-charcoal mb-1">Store Phone</h3>
-              <p className="text-xs sm:text-sm text-charcoal/70 leading-relaxed mb-2">
+              <h3 className="font-serif font-bold text-xl card-box-heading mb-1">Store Phone</h3>
+              <p className="text-xs sm:text-sm card-box-body leading-relaxed mb-2">
                 Order takeaway or check today's hot roasts.
               </p>
               <a
                 href={`tel:${SHOP_INFO.phoneRaw}`}
-                className="text-2xl font-serif font-bold text-charcoal hover:text-orange-burnt transition-colors block"
+                className="text-2xl font-serif font-bold card-box-heading hover:text-orange-burnt transition-colors block"
               >
                 {SHOP_INFO.phone}
               </a>
@@ -105,23 +105,23 @@ export default function ContactPage() {
           </div>
 
           {/* Card 3: Hours Summary */}
-          <div className="p-8 rounded-[24px] bg-white border border-charcoal/10 shadow-warm flex flex-col justify-between">
+          <div className="p-8 rounded-[24px] card-box flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-orange-burnt/10 flex items-center justify-center text-orange-burnt mb-4">
+              <div className="w-12 h-12 rounded-2xl card-chip flex items-center justify-center mb-4">
                 <Clock className="w-6 h-6" />
               </div>
               <div className="flex items-center justify-between mb-1">
-                <h3 className="font-serif font-bold text-xl text-charcoal">Store Hours</h3>
+                <h3 className="font-serif font-bold text-xl card-box-heading">Store Hours</h3>
                 <span className="text-[10px] font-mono text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300 font-bold">
                   {shopStatus.label}
                 </span>
               </div>
-              <p className="text-xs text-charcoal/70 leading-relaxed">
+              <p className="text-xs card-box-body leading-relaxed">
                 Mon–Wed & Sun: 10am – 8pm<br />
                 Thu–Sat: 10am – 8:30pm
               </p>
             </div>
-            <div className="text-[11px] text-charcoal/50 mt-4 flex items-center gap-1">
+            <div className="text-[11px] card-box-muted mt-4 flex items-center gap-1">
               <span>Sydney NSW Time</span>
             </div>
           </div>
@@ -220,14 +220,14 @@ export default function ContactPage() {
 
       {/* 4. CONTACT ENQUIRY FORM [LIGHT SECTION] */}
       <div className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-t border-charcoal/10">
-        <div className="max-w-3xl mx-auto bg-white rounded-[28px] border border-charcoal/10 p-6 sm:p-10 shadow-warm-lg">
+        <div className="max-w-3xl mx-auto card-box rounded-[28px] p-6 sm:p-10">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-burnt/10 text-orange-burnt text-xs uppercase font-mono font-bold mb-2">
-              <Mail className="w-3.5 h-3.5 text-orange-burnt" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full card-chip text-xs uppercase font-mono font-bold mb-2">
+              <Mail className="w-3.5 h-3.5" />
               <span>Get In Touch</span>
             </div>
-            <h2 className="text-3xl font-serif font-bold text-charcoal">Send Us a Direct Message</h2>
-            <p className="text-charcoal/70 text-xs sm:text-sm mt-1">
+            <h2 className="text-3xl font-serif font-bold card-box-heading">Send Us a Direct Message</h2>
+            <p className="card-box-body text-xs sm:text-sm mt-1">
               Fill out the form below to message our management team directly.
             </p>
           </div>
@@ -349,10 +349,10 @@ export default function ContactPage() {
             {CUSTOMER_REVIEWS.map((rev, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-charcoal-50 border border-cream/10 shadow-sm flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-charcoal-50 border border-cream/10 shadow-sm flex flex-col justify-between hover:border-orange-burnt/40 transition-colors"
               >
                 <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-2">
+                  <div className="flex items-center gap-1 text-amber-400 mb-3">
                     {[...Array(rev.rating)].map((_, i) => (
                       <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                     ))}
@@ -361,9 +361,30 @@ export default function ContactPage() {
                     "{rev.comment}"
                   </p>
                 </div>
-                <div className="pt-2 border-t border-cream/10 flex items-center justify-between text-xs">
-                  <span className="font-bold text-cream">{rev.name}</span>
-                  <span className="text-orange-glow text-[11px]">{rev.date}</span>
+                <div className="pt-3 border-t border-cream/10 flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-orange-burnt/40 bg-charcoal flex-shrink-0 shadow-sm">
+                    {rev.avatar && (
+                      <img
+                        src={rev.avatar}
+                        alt={rev.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-burnt to-chilli -z-10 flex items-center justify-center font-bold text-white text-xs">
+                      {rev.initials || rev.name.charAt(0)}
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-bold text-cream text-xs sm:text-sm block truncate">
+                      {rev.name}
+                    </span>
+                    <span className="text-orange-glow text-[11px] block mt-0.5">
+                      {rev.date}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}

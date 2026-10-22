@@ -87,8 +87,8 @@ export default function CateringPage() {
 
       {/* 2. MAIN INTERACTIVE CATERING CALCULATOR FORM [LIGHT SECTION] */}
       <div className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-b border-charcoal/10">
-        <div className="max-w-5xl mx-auto bg-white rounded-[28px] border border-charcoal/10 p-6 sm:p-10 shadow-warm-lg">
-          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-charcoal mb-6">
+        <div className="max-w-5xl mx-auto card-box rounded-[28px] p-6 sm:p-10">
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold card-box-heading mb-6">
             Build Your Event Catering Quote
           </h2>
 
@@ -161,17 +161,17 @@ export default function CateringPage() {
                       </span>
                     </div>
 
-                    <div className="flex items-center bg-white border border-charcoal/20 rounded-full px-2 py-1 shadow-sm">
+                    <div className="flex items-center card-inner-box border rounded-full px-2 py-1 shadow-sm">
                       <button
                         onClick={() => handleTrayChange(opt.id, -1)}
-                        className="px-2 py-0.5 hover:text-orange-burnt text-sm font-bold text-charcoal"
+                        className="px-2 py-0.5 hover:text-orange-burnt text-sm font-bold card-box-heading"
                       >
                         -
                       </button>
-                      <span className="w-6 text-center font-bold text-charcoal text-xs">{qty}</span>
+                      <span className="w-6 text-center font-bold card-box-heading text-xs">{qty}</span>
                       <button
                         onClick={() => handleTrayChange(opt.id, 1)}
-                        className="px-2 py-0.5 hover:text-orange-burnt text-sm font-bold text-charcoal"
+                        className="px-2 py-0.5 hover:text-orange-burnt text-sm font-bold card-box-heading"
                       >
                         +
                       </button>

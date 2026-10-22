@@ -39,16 +39,16 @@ export default function MenuPage({ onAddToCart, cartCount, cartTotal, onOpenCart
 
       {/* 4. FAST PICKUP & CATERING INQUIRY CALLOUT [LIGHT SECTION] */}
       <section className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-t border-charcoal/10">
-        <div className="max-w-5xl mx-auto rounded-[24px] bg-white border border-charcoal/10 p-8 sm:p-10 shadow-warm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-5xl mx-auto rounded-[24px] card-box p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-burnt/10 text-orange-burnt text-xs font-mono font-bold mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-orange-burnt" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full card-chip text-xs font-mono font-bold mb-2">
+              <Sparkles className="w-3.5 h-3.5" />
               <span>Planning an Event?</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-charcoal">
+            <h3 className="text-2xl sm:text-3xl font-serif font-bold card-box-heading">
               Hosting a Party or Family Gathering?
             </h3>
-            <p className="text-charcoal/70 text-xs sm:text-sm mt-1 max-w-xl">
+            <p className="card-box-body text-xs sm:text-sm mt-1 max-w-xl">
               Order party trays of roast meats, salads, and hot bites with 4-day notice.
               Or call our shop counter directly for quick phone orders!
             </p>

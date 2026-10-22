@@ -61,17 +61,17 @@ export default function AboutPage() {
 
             {/* Real Photo Card */}
             <div className="lg:col-span-5">
-              <div className="rounded-[28px] overflow-hidden border border-charcoal/15 shadow-warm-lg bg-white p-3">
+              <div className="rounded-[28px] overflow-hidden card-box p-3">
                 <img
                   src="/homeslide.jpg"
                   alt="Homers Emerton Real Food Spread"
                   className="w-full h-auto rounded-2xl object-cover shadow"
                 />
                 <div className="p-4 text-center">
-                  <span className="font-serif font-bold text-lg text-charcoal block">
+                  <span className="font-serif font-bold text-lg card-box-heading block">
                     The Homers Takeaway Feast
                   </span>
-                  <span className="text-xs text-charcoal/60">
+                  <span className="text-xs card-box-muted">
                     Photographed in-store at Shop 2, 135-137 Popondetta Rd, Emerton
                   </span>
                 </div>
@@ -120,17 +120,41 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {CUSTOMER_REVIEWS.slice(0, 2).map((rev, i) => (
-              <div key={i} className="p-8 rounded-[24px] bg-white border border-charcoal/10 shadow-warm">
-                <div className="flex items-center gap-1 text-amber-500 mb-3">
-                  {[...Array(5)].map((_, idx) => (
-                    <Star key={idx} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
+              <div key={i} className="p-8 rounded-[24px] card-box flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-1 text-amber-500 mb-3">
+                    {[...Array(5)].map((_, idx) => (
+                      <Star key={idx} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <p className="italic card-box-body text-sm leading-relaxed mb-4">
+                    "{rev.comment}"
+                  </p>
                 </div>
-                <p className="italic text-charcoal/80 text-sm leading-relaxed mb-4">
-                  "{rev.comment}"
-                </p>
-                <div className="text-xs font-bold text-orange-burnt">
-                  — {rev.name} ({rev.date})
+                <div className="pt-3 border-t border-charcoal/10 dark:border-cream/10 flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-orange-burnt/40 bg-charcoal flex-shrink-0 shadow-sm">
+                    {rev.avatar && (
+                      <img
+                        src={rev.avatar}
+                        alt={rev.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-burnt to-chilli -z-10 flex items-center justify-center font-bold text-white text-xs">
+                      {rev.initials || rev.name.charAt(0)}
+                    </div>
+                  </div>
+                  <div>
+                    <span className="font-bold card-box-heading text-sm block">
+                      {rev.name}
+                    </span>
+                    <span className="text-orange-burnt text-xs font-mono block">
+                      {rev.date}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}

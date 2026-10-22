@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Sparkles, Clock, Flame, ArrowRight } from 'lucide-react';
 import { SHOP_INFO } from '../config';
 
-export default function LunchBanner({ onOpenMenu }) {
-  const [timeLeft, setTimeLeft] = useState('2 hrs 45 mins');
+export default function LunchBanner({ onOpenSpecials, onOpenMenu }) {
+  const [timeLeft, setTimeLeft] = useState('Daily 11:00 AM – 2:00 PM');
+  const handleOpen = onOpenSpecials || onOpenMenu;
 
   // Compute remaining time until lunch finish (2:00 PM)
   useEffect(() => {
@@ -13,7 +14,7 @@ export default function LunchBanner({ onOpenMenu }) {
       endLunch.setHours(14, 0, 0, 0); // 2:00 PM
 
       const diff = endLunch.getTime() - now.getTime();
-      if (diff > 0 && now.getHours() >= 10 && now.getHours() < 14) {
+      if (diff > 0 && now.getHours() >= 11 && now.getHours() < 14) {
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         setTimeLeft(`${hours}h ${mins}m remaining`);
@@ -31,7 +32,10 @@ export default function LunchBanner({ onOpenMenu }) {
     <div className="bg-gradient-to-r from-charcoal via-charcoal-50 to-charcoal border-y border-orange-burnt/30 py-3.5 px-4 text-cream">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs sm:text-sm">
         {/* Left Deal Info */}
-        <div className="flex items-center gap-3 text-center sm:text-left">
+        <div
+          className={`flex items-center gap-3 text-center sm:text-left ${handleOpen ? 'cursor-pointer' : ''}`}
+          onClick={handleOpen}
+        >
           <span className="flex-shrink-0 px-2.5 py-0.5 rounded-full bg-chilli text-white font-bold text-[11px] uppercase tracking-wider shadow">
             HOT DEAL
           </span>
@@ -50,13 +54,15 @@ export default function LunchBanner({ onOpenMenu }) {
             <span>{timeLeft}</span>
           </div>
 
-          <a
-            href="#menu"
-            className="inline-flex items-center gap-1 text-xs font-semibold text-white bg-orange-burnt hover:bg-orange-600 px-3.5 py-1 rounded-full transition-colors"
+          <button
+            type="button"
+            id="view-lunch-specials-btn"
+            onClick={handleOpen}
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-orange-burnt hover:bg-orange-600 active:scale-95 px-4 py-1.5 rounded-full transition-all cursor-pointer shadow-warm"
           >
             <span>View Specials</span>
-            <ArrowRight className="w-3 h-3" />
-          </a>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
     </div>

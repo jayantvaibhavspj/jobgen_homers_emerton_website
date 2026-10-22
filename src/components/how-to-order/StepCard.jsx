@@ -70,16 +70,8 @@ export default function StepCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={tiltStyle}
-      className={`order-step-card rounded-[22px] p-6 sm:p-8 transition-all duration-300 flex flex-col items-center text-center group will-change-transform transform-gpu ${
-        isLight
-          ? 'bg-white border shadow-warm'
-          : 'bg-charcoal-50 border shadow-warm'
-      } ${
-        isActive || isHovered
-          ? 'border-orange-burnt/60 shadow-warm-lg -translate-y-1.5'
-          : isLight
-          ? 'border-charcoal/10 hover:border-orange-burnt/40'
-          : 'border-cream/10 hover:border-orange-burnt/40'
+      className={`order-step-card card-box rounded-[22px] p-6 sm:p-8 transition-all duration-300 flex flex-col items-center text-center group will-change-transform transform-gpu ${
+        isActive || isHovered ? 'active-card -translate-y-1.5' : ''
       }`}
     >
       {/* 1. Step Number & Circular Icon */}
@@ -87,12 +79,15 @@ export default function StepCard({
         {/* Animated Icon Ring */}
         <div
           ref={iconRingRef}
-          className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 shadow-warm will-change-transform ${
+          style={{
+            backgroundColor: (isActive || isHovered) ? '#e8700a' : 'var(--card-icon-ring-bg)',
+            borderColor: (isActive || isHovered) ? 'transparent' : 'var(--card-icon-ring-border)',
+            color: (isActive || isHovered) ? '#ffffff' : 'var(--card-icon-ring-text)',
+          }}
+          className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 shadow-warm border will-change-transform ${
             isActive || isHovered
-              ? 'bg-orange-burnt text-white scale-105 shadow-glow-orange'
-              : isLight
-              ? 'bg-orange-burnt/10 border border-orange-burnt/30 text-orange-burnt group-hover:scale-110 group-hover:bg-orange-burnt group-hover:text-white'
-              : 'bg-cream/10 border border-orange-burnt/30 text-orange-glow group-hover:scale-110 group-hover:bg-orange-burnt group-hover:text-white'
+              ? 'scale-105 shadow-glow-orange'
+              : 'group-hover:scale-110'
           }`}
         >
           <IconComponent className="w-7 h-7" />
@@ -101,14 +96,22 @@ export default function StepCard({
         {/* Step Number Badge / Done State */}
         <span
           ref={badgeRef}
+          style={
+            isDone
+              ? {}
+              : isActive
+              ? {}
+              : {
+                  backgroundColor: 'var(--card-num-badge-bg)',
+                  color: 'var(--card-num-badge-text)',
+                }
+          }
           className={`absolute -top-2 -right-2 text-[11px] font-mono font-bold w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 shadow-sm will-change-transform ${
             isDone
               ? 'bg-emerald-600 text-white border border-emerald-400'
               : isActive
               ? 'bg-orange-burnt text-white border border-amber-300 scale-110'
-              : isLight
-              ? 'bg-charcoal text-white'
-              : 'bg-charcoal border border-cream/20 text-cream/70'
+              : ''
           }`}
         >
           {isDone ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : step.num}
@@ -143,23 +146,17 @@ export default function StepCard({
 
       {/* 3. Step Title (Preserved Exact Copy) */}
       <h3
-        className={`text-2xl font-serif font-bold mb-3 transition-colors mt-2 ${
+        className={`text-2xl font-serif font-bold mb-3 transition-colors mt-2 card-box-heading ${
           isActive || isHovered
             ? 'text-orange-burnt'
-            : isLight
-            ? 'text-charcoal group-hover:text-orange-burnt'
-            : 'text-cream group-hover:text-orange-glow'
+            : 'group-hover:text-orange-burnt'
         }`}
       >
         {step.title}
       </h3>
 
       {/* 4. Step Description (Preserved Exact Copy) */}
-      <p
-        className={`text-xs sm:text-sm leading-relaxed ${
-          isLight ? 'text-charcoal/70' : 'text-cream/70'
-        }`}
-      >
+      <p className="text-xs sm:text-sm leading-relaxed card-box-body">
         {step.desc}
       </p>
     </div>

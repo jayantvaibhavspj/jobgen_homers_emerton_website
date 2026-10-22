@@ -24,7 +24,7 @@ export const HERO_CONFIG = {
   scrollParallaxMax: -60,
 };
 
-export default function Hero({ onOpenCart }) {
+export default function Hero({ onOpenCart, onOpenSpecials }) {
   const [weather, setWeather] = useState({ chipText: '21°C · Emerton Takeaway', mode: 'mild' });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
@@ -162,7 +162,18 @@ export default function Hero({ onOpenCart }) {
 
         {/* Step 2: Price Anchoring Pill Badge (Fade Up) */}
         <motion.div
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream/10 border border-cream/20 backdrop-blur-md text-xs sm:text-sm font-medium text-cream mb-6 shadow-warm transform hover:scale-105 transition-all"
+          onClick={onOpenSpecials}
+          role={onOpenSpecials ? 'button' : undefined}
+          tabIndex={onOpenSpecials ? 0 : undefined}
+          onKeyDown={(e) => {
+            if (onOpenSpecials && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              onOpenSpecials();
+            }
+          }}
+          className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cream/10 border border-cream/20 backdrop-blur-md text-xs sm:text-sm font-medium text-cream mb-6 shadow-warm transform hover:scale-105 transition-all ${
+            onOpenSpecials ? 'cursor-pointer hover:border-orange-burnt/60 hover:bg-cream/15' : ''
+          }`}
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{

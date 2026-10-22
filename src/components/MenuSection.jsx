@@ -183,9 +183,9 @@ export default function MenuSection({ onAddToCart, cartCount, cartTotal, onOpenC
 
         {/* Menu Dish Cards Grid with Stagger & Smooth Layout Transition */}
         {filteredItems.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-2xl border border-charcoal/10 p-8">
-            <p className="text-xl font-serif text-charcoal mb-2">No dishes match your search</p>
-            <p className="text-xs text-charcoal/60 mb-4">
+          <div className="text-center py-16 card-box rounded-2xl p-8">
+            <p className="text-xl font-serif card-box-heading mb-2">No dishes match your search</p>
+            <p className="text-xs card-box-muted mb-4">
               Try searching for something else like "burger", "chips", or "curry".
             </p>
             <button
@@ -223,7 +223,7 @@ export default function MenuSection({ onAddToCart, cartCount, cartTotal, onOpenC
                       ease: [0.22, 1, 0.36, 1],
                       layout: { duration: 0.3, ease: 'easeOut' },
                     }}
-                    className="group flex flex-col justify-between bg-white rounded-[20px] overflow-hidden border border-charcoal/10 shadow-warm-sm hover:shadow-warm-lg hover:-translate-y-1 transition-all duration-300"
+                    className="group flex flex-col justify-between card-box rounded-[20px] overflow-hidden hover:-translate-y-1 transition-all duration-300"
                   >
                     {/* Top Image & Badge */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-charcoal/5">
@@ -253,25 +253,25 @@ export default function MenuSection({ onAddToCart, cartCount, cartTotal, onOpenC
                       )}
 
                       {/* Price Tag in Image */}
-                      <div className="absolute bottom-3 right-3 bg-cream/95 text-charcoal font-serif font-bold text-base px-3 py-1 rounded-full shadow-md border border-charcoal/10">
-                        ${dish.price.toFixed(2)} AUD
+                      <div className="absolute bottom-3 right-3 card-inner-box font-serif font-bold text-base px-3 py-1 rounded-full shadow-md border">
+                        <span className="card-box-heading">${dish.price.toFixed(2)} AUD</span>
                       </div>
                     </div>
 
                     {/* Card Content */}
                     <div className="p-5 flex-1 flex flex-col justify-between">
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-serif font-bold text-charcoal mb-2 leading-snug group-hover:text-orange-burnt transition-colors">
+                        <h3 className="text-xl sm:text-2xl font-serif font-bold card-box-heading mb-2 leading-snug group-hover:text-orange-burnt transition-colors">
                           {dish.name}
                         </h3>
-                        <p className="text-charcoal/70 text-xs sm:text-sm leading-relaxed mb-4">
+                        <p className="card-box-body text-xs sm:text-sm leading-relaxed mb-4">
                           {dish.description}
                         </p>
                       </div>
 
                       {/* Bottom Action */}
-                      <div className="pt-3 border-t border-charcoal/10 flex items-center justify-between">
-                        <span className="text-xs text-charcoal/50 font-mono">
+                      <div className="pt-3 border-t border-charcoal/10 dark:border-cream/10 flex items-center justify-between">
+                        <span className="text-xs card-box-muted font-mono">
                           Made Fresh to Order
                         </span>
 

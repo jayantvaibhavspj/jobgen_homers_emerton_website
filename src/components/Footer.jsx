@@ -2,6 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Flame, ArrowUp, Phone, MapPin, Heart, Clock, Bike, ShieldCheck, Sparkles } from 'lucide-react';
 import { SHOP_INFO, OPERATING_HOURS } from '../config';
+import FooterScene from './footer-scene/FooterScene';
+
+const ROAD_TICKER_ITEMS = [
+  { text: "🛵 Homers Hot Express Delivery", badge: "💨" },
+  { text: "🍔 Made Fresh To Order · Popondetta Rd", badge: "📍" },
+  { text: "🍗 Crispy Roasts & Golden Fish", badge: "🔥" },
+  { text: "⚡ Hot & Fresh Pick-up In 15 Mins", badge: "⏱️" },
+  { text: "🍟 Famous Aussie Chicken Salt Chips", badge: "✨" },
+  { text: "🍛 Slow-Simmered Traditional Curries", badge: "🍲" },
+  { text: "⭐ Family-Run Western Sydney Takeaway", badge: "❤️" },
+];
+
+// Repeat to ensure each half is >4500px wide so right edge is never empty on any screen
+const TICKER_BLOCK = [...ROAD_TICKER_ITEMS, ...ROAD_TICKER_ITEMS];
 
 export default function Footer({ onOpenCatering }) {
   const scrollToTop = () => {
@@ -10,35 +24,46 @@ export default function Footer({ onOpenCatering }) {
 
   return (
     <footer className="bg-charcoal text-cream pt-16 pb-28 lg:pb-12 border-t border-cream/10 relative overflow-hidden">
-      {/* ANIMATED DELIVERY SCOOTER / VAN ROAD (Golden Kim inspired feature) */}
-      <div className="absolute top-0 left-0 right-0 h-9 bg-charcoal-100 border-b border-cream/10 overflow-hidden select-none pointer-events-none">
+      {/* ANIMATED DELIVERY SCOOTER / VAN ROAD (Seamless Infinite Loop) */}
+      <div className="absolute top-0 left-0 right-0 h-9 bg-charcoal-100 border-b border-cream/10 overflow-hidden select-none pointer-events-none flex items-center">
         {/* Road center dashes */}
-        <div className="absolute top-1/2 left-0 right-0 h-0.5 border-b border-dashed border-cream/20 -translate-y-1/2" />
+        <div className="absolute top-1/2 left-0 right-0 h-0.5 border-b border-dashed border-cream/20 -translate-y-1/2 pointer-events-none" />
 
-        {/* Animated cruising scooter & takeaway parcel */}
-        <div className="absolute top-1 left-0 flex items-center gap-1 text-orange-burnt animate-marquee">
-          <div className="flex items-center gap-2 mx-16">
-            <span className="text-[10px] font-mono tracking-widest text-cream/50 uppercase">
-              🛵 Homers Hot Express Delivery
-            </span>
-            <span className="text-xs">💨</span>
+        {/* Animated cruising scooter & takeaway parcel track (Continuous Infinite Marquee) */}
+        <div
+          className="relative z-10 flex items-center text-orange-burnt animate-marquee whitespace-nowrap"
+          style={{ animationDuration: '40s' }}
+        >
+          {/* Loop Set 1 */}
+          <div className="flex items-center shrink-0">
+            {TICKER_BLOCK.map((item, idx) => (
+              <div key={`road-1-${idx}`} className="flex items-center gap-2 mx-8 sm:mx-12 shrink-0">
+                <span className="text-[10px] font-mono tracking-widest text-cream/60 uppercase">
+                  {item.text}
+                </span>
+                <span className="text-xs">{item.badge}</span>
+              </div>
+            ))}
           </div>
-          <div className="flex items-center gap-2 mx-16">
-            <span className="text-[10px] font-mono tracking-widest text-cream/50 uppercase">
-              🍔 Made Fresh To Order · Popondetta Rd
-            </span>
-            <span className="text-xs">⚡</span>
-          </div>
-          <div className="flex items-center gap-2 mx-16">
-            <span className="text-[10px] font-mono tracking-widest text-cream/50 uppercase">
-              🍗 Crispy Roasts & Golden Fish
-            </span>
-            <span className="text-xs">🔥</span>
+
+          {/* Loop Set 2 (Exact duplicate for seamless, endless loop) */}
+          <div className="flex items-center shrink-0" aria-hidden="true">
+            {TICKER_BLOCK.map((item, idx) => (
+              <div key={`road-2-${idx}`} className="flex items-center gap-2 mx-8 sm:mx-12 shrink-0">
+                <span className="text-[10px] font-mono tracking-widest text-cream/60 uppercase">
+                  {item.text}
+                </span>
+                <span className="text-xs">{item.badge}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+      {/* ATMOSPHERIC MOTION-GRAPHIC VECTOR SCENE (Behind Footer Content) */}
+      <FooterScene />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-cream/10">
           {/* Column 1: Brand Info & Socials */}
           <div className="lg:col-span-5 space-y-4">

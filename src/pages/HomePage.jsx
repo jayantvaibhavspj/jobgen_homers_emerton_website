@@ -10,13 +10,13 @@ import HowToOrder from '../components/HowToOrder';
 import { Utensils, ArrowRight, Star, Flame } from 'lucide-react';
 import { CUSTOMER_REVIEWS } from '../config';
 
-export default function HomePage({ onAddToCart, onOpenCart }) {
+export default function HomePage({ onAddToCart, onOpenCart, onOpenSpecials }) {
   return (
     <div>
       {/* 1. HERO + LUNCH BANNER + MARQUEE [DARK SECTION] */}
       <div className="bg-charcoal text-cream">
-        <Hero onOpenCart={onOpenCart} />
-        <LunchBanner />
+        <Hero onOpenCart={onOpenCart} onOpenSpecials={onOpenSpecials} />
+        <LunchBanner onOpenSpecials={onOpenSpecials} />
         <MarqueeStrip />
       </div>
 
@@ -32,16 +32,16 @@ export default function HomePage({ onAddToCart, onOpenCart }) {
       <section className="bg-cream text-charcoal py-16 px-4 sm:px-6 border-b border-charcoal/10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Box 1: Custom Burger Builder */}
-          <div className="p-8 rounded-[24px] bg-white border border-charcoal/10 shadow-warm flex flex-col justify-between group hover:border-orange-burnt/50 transition-all hover:shadow-warm-lg">
+          <div className="p-8 rounded-[24px] card-box flex flex-col justify-between group transition-all">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-burnt/10 text-orange-burnt text-xs uppercase font-mono font-bold mb-3">
-                <Flame className="w-3.5 h-3.5 text-orange-burnt" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full card-chip text-xs uppercase font-mono font-bold mb-3">
+                <Flame className="w-3.5 h-3.5" />
                 <span>Interactive Builder</span>
               </div>
-              <h3 className="text-3xl font-serif font-bold text-charcoal mb-2 group-hover:text-orange-burnt transition-colors">
+              <h3 className="text-3xl font-serif font-bold card-box-heading mb-2 group-hover:text-orange-burnt transition-colors">
                 Stack Your Dream Burger
               </h3>
-              <p className="text-charcoal/70 text-xs sm:text-sm leading-relaxed mb-6">
+              <p className="card-box-body text-xs sm:text-sm leading-relaxed mb-6">
                 Watch 8 fresh layers stack with physics on scroll! Add double Angus patties, extra smoked bacon,
                 sunny fried egg, or roasted jalapeños with live pricing.
               </p>
@@ -56,16 +56,16 @@ export default function HomePage({ onAddToCart, onOpenCart }) {
           </div>
 
           {/* Box 2: Full Menu & In-Store Boards */}
-          <div className="p-8 rounded-[24px] bg-white border border-charcoal/10 shadow-warm flex flex-col justify-between group hover:border-charcoal/30 transition-all hover:shadow-warm-lg">
+          <div className="p-8 rounded-[24px] card-box flex flex-col justify-between group transition-all">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-charcoal/5 text-charcoal/80 text-xs uppercase font-mono font-bold mb-3">
-                <Utensils className="w-3.5 h-3.5 text-orange-burnt" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full card-chip text-xs uppercase font-mono font-bold mb-3">
+                <Utensils className="w-3.5 h-3.5" />
                 <span>Explore Full Range</span>
               </div>
-              <h3 className="text-3xl font-serif font-bold text-charcoal mb-2 group-hover:text-orange-burnt transition-colors">
+              <h3 className="text-3xl font-serif font-bold card-box-heading mb-2 group-hover:text-orange-burnt transition-colors">
                 Browse Full Takeaway Menu
               </h3>
-              <p className="text-charcoal/70 text-xs sm:text-sm leading-relaxed mb-6">
+              <p className="card-box-body text-xs sm:text-sm leading-relaxed mb-6">
                 From crispy battered fish & chips to slow-cooked roasts, chicken dinners, aromatic curries,
                 salads, and our official wall-mounted menu boards.
               </p>
@@ -110,10 +110,10 @@ export default function HomePage({ onAddToCart, onOpenCart }) {
             {CUSTOMER_REVIEWS.map((rev, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-charcoal-50 border border-cream/10 shadow-sm flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-charcoal-50 border border-cream/10 shadow-sm flex flex-col justify-between hover:border-orange-burnt/40 transition-colors"
               >
                 <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-2">
+                  <div className="flex items-center gap-1 text-amber-400 mb-3">
                     {[...Array(rev.rating)].map((_, i) => (
                       <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                     ))}
@@ -122,9 +122,30 @@ export default function HomePage({ onAddToCart, onOpenCart }) {
                     "{rev.comment}"
                   </p>
                 </div>
-                <div className="pt-2 border-t border-cream/10 flex items-center justify-between text-xs">
-                  <span className="font-bold text-cream">{rev.name}</span>
-                  <span className="text-orange-glow text-[11px]">{rev.date}</span>
+                <div className="pt-3 border-t border-cream/10 flex items-center gap-3">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-orange-burnt/40 bg-charcoal flex-shrink-0 shadow-sm">
+                    {rev.avatar && (
+                      <img
+                        src={rev.avatar}
+                        alt={rev.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-burnt to-chilli -z-10 flex items-center justify-center font-bold text-white text-xs">
+                      {rev.initials || rev.name.charAt(0)}
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-bold text-cream text-xs sm:text-sm block truncate">
+                      {rev.name}
+                    </span>
+                    <span className="text-orange-glow text-[11px] block mt-0.5">
+                      {rev.date}
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}

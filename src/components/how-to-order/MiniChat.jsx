@@ -121,11 +121,10 @@ export default function MiniChat({ isPlaying, triggerKey, isLight = true }) {
         {/* 3. Kitchen reply bubble with verified ticks */}
         <div
           ref={bubble2Ref}
-          className="self-end inline-flex items-center gap-1 px-2.5 py-1 rounded-t-lg rounded-bl-lg rounded-br-sm text-[10px] font-semibold leading-none shadow-sm opacity-0 will-change-transform ml-auto"
+          className="self-end inline-flex items-center gap-1 px-2.5 py-1 rounded-t-lg rounded-bl-lg rounded-br-sm text-[10px] font-semibold leading-none shadow-sm opacity-0 will-change-transform ml-auto card-inner-box"
           style={{
-            backgroundColor: isLight ? '#ffffff' : '#221b16',
-            color: isLight ? '#17110d' : '#fbf6f0',
             border: '1px solid rgba(232, 112, 10, 0.3)',
+            color: 'var(--card-text-heading)',
           }}
         >
           <span>Order received</span>

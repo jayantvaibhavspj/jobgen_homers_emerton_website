@@ -42,7 +42,7 @@ export default function MiniTimer({ isPlaying, triggerKey, isLight = true, enabl
       if (ringRef.current) {
         tl.to(ringRef.current, {
           strokeDashoffset: 0,
-          duration: 0.9,
+          duration: 0.4,
           ease: 'power2.out',
         });
       }
@@ -52,9 +52,9 @@ export default function MiniTimer({ isPlaying, triggerKey, isLight = true, enabl
         tl.to(steamRef.current, {
           opacity: 0.9,
           y: -4,
-          duration: 0.4,
+          duration: 0.25,
           ease: 'power1.out',
-        }, '-=0.5');
+        }, '-=0.25');
       }
 
       // 3. Status badge pops
@@ -62,9 +62,9 @@ export default function MiniTimer({ isPlaying, triggerKey, isLight = true, enabl
         tl.to(statusBadgeRef.current, {
           scale: 1,
           opacity: 1,
-          duration: 0.3,
+          duration: 0.2,
           ease: 'back.out(2)',
-        }, '-=0.3');
+        }, '-=0.15');
       }
 
       // 4. Delivery scooter zips across path
@@ -72,17 +72,17 @@ export default function MiniTimer({ isPlaying, triggerKey, isLight = true, enabl
         tl.to(scooterRef.current, {
           opacity: 1,
           x: 0,
-          duration: 0.2,
+          duration: 0.12,
           ease: 'power1.in',
         })
         .to(scooterRef.current, {
           x: 82,
-          duration: 0.8,
+          duration: 0.38,
           ease: 'power2.out',
         })
         .to(scooterRef.current, {
           opacity: 0.7,
-          duration: 0.2,
+          duration: 0.12,
         });
       }
 

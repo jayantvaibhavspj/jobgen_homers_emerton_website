@@ -24,7 +24,7 @@ export default function OrderOnlinePage({ onOpenCart }) {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* 1. DIRECT PICKUP (RECOMMENDED) */}
-            <div className="rounded-[28px] bg-white border-2 border-orange-burnt p-8 shadow-warm-lg flex flex-col justify-between relative transform md:-translate-y-2">
+            <div className="rounded-[28px] card-box border-2 border-orange-burnt p-8 flex flex-col justify-between relative transform md:-translate-y-2">
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-orange-burnt text-white text-[11px] font-bold font-mono uppercase tracking-wider px-3.5 py-1 rounded-full shadow">
                 ★ Recommended & Zero Markup
               </div>
@@ -36,15 +36,15 @@ export default function OrderOnlinePage({ onOpenCart }) {
                     Direct Kitchen
                   </span>
                 </div>
-                <h2 className="text-2xl font-serif font-bold text-charcoal mb-2">
+                <h2 className="text-2xl font-serif font-bold card-box-heading mb-2">
                   Direct Store Pickup
                 </h2>
-                <p className="text-charcoal/70 text-xs sm:text-sm leading-relaxed mb-6">
+                <p className="card-box-body text-xs sm:text-sm leading-relaxed mb-6">
                   Build your cart right here on our website and send directly to our kitchen via WhatsApp or call us.
                   Ready in 15–20 minutes, piping hot!
                 </p>
 
-                <div className="space-y-2.5 text-xs text-charcoal/80 mb-6">
+                <div className="space-y-2.5 text-xs card-box-body mb-6">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                     <span>Cheapest in-store menu pricing</span>
@@ -71,7 +71,7 @@ export default function OrderOnlinePage({ onOpenCart }) {
 
                 <Link
                   to="/menu"
-                  className="w-full py-2.5 px-6 rounded-full bg-charcoal/5 hover:bg-charcoal/10 text-charcoal font-medium text-xs border border-charcoal/15 transition-colors flex items-center justify-center"
+                  className="w-full py-2.5 px-6 rounded-full bg-charcoal/5 hover:bg-charcoal/10 text-charcoal font-medium text-xs border border-charcoal/15 transition-colors flex items-center justify-center card-box-heading"
                 >
                   Browse Full Menu First
                 </Link>
@@ -79,7 +79,7 @@ export default function OrderOnlinePage({ onOpenCart }) {
             </div>
 
             {/* 2. UBER EATS */}
-            <div className="rounded-[28px] bg-white border border-charcoal/15 hover:border-emerald-500/50 p-8 shadow-warm flex flex-col justify-between transition-all">
+            <div className="rounded-[28px] card-box p-8 flex flex-col justify-between transition-all">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-3xl">🚗</span>
@@ -87,14 +87,14 @@ export default function OrderOnlinePage({ onOpenCart }) {
                     Uber Eats
                   </span>
                 </div>
-                <h2 className="text-2xl font-serif font-bold text-charcoal mb-2">
+                <h2 className="text-2xl font-serif font-bold card-box-heading mb-2">
                   Uber Eats Delivery
                 </h2>
-                <p className="text-charcoal/70 text-xs sm:text-sm leading-relaxed mb-6">
+                <p className="card-box-body text-xs sm:text-sm leading-relaxed mb-6">
                   Direct doorstep delivery with Uber One benefits. Perfect when you're chilling at home or hosting friends.
                 </p>
 
-                <div className="space-y-2.5 text-xs text-charcoal/70 mb-6">
+                <div className="space-y-2.5 text-xs card-box-body mb-6">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-charcoal/40 flex-shrink-0" />
                     <span>Delivered in 25–40 minutes</span>
@@ -122,7 +122,7 @@ export default function OrderOnlinePage({ onOpenCart }) {
             </div>
 
             {/* 3. DOORDASH */}
-            <div className="rounded-[28px] bg-white border border-charcoal/15 hover:border-red-500/50 p-8 shadow-warm flex flex-col justify-between transition-all">
+            <div className="rounded-[28px] card-box p-8 flex flex-col justify-between transition-all">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-3xl">🛵</span>
@@ -130,14 +130,14 @@ export default function OrderOnlinePage({ onOpenCart }) {
                     DoorDash
                   </span>
                 </div>
-                <h2 className="text-2xl font-serif font-bold text-charcoal mb-2">
+                <h2 className="text-2xl font-serif font-bold card-box-heading mb-2">
                   DoorDash Delivery
                 </h2>
-                <p className="text-charcoal/70 text-xs sm:text-sm leading-relaxed mb-6">
+                <p className="card-box-body text-xs sm:text-sm leading-relaxed mb-6">
                   DoorDash DashPass members can enjoy reduced service fees and quick delivery across Western Sydney.
                 </p>
 
-                <div className="space-y-2.5 text-xs text-charcoal/70 mb-6">
+                <div className="space-y-2.5 text-xs card-box-body mb-6">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-charcoal/40 flex-shrink-0" />
                     <span>DoorDash DashPass eligible</span>
