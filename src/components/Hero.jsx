@@ -7,7 +7,6 @@ import { fetchEmertonWeather } from '../utils/weatherApi';
 import HeroVideo from './hero/HeroVideo';
 import HeroScrim from './hero/HeroScrim';
 import HeroContent from './hero/HeroContent';
-import HeroStats from './hero/HeroStats';
 import ClipCaption from './hero/ClipCaption';
 import ClipProgress from './hero/ClipProgress';
 import { heroContent, heroSettings } from './hero/heroConfig';
@@ -191,7 +190,6 @@ export default function Hero({ onOpenCart, onOpenSpecials }) {
               prefersReducedMotion={prefersReducedMotion}
               isMobile={false}
               includeWeather={false}
-              includeStats={false}
             />
           </div>
         </div>
@@ -216,9 +214,6 @@ export default function Hero({ onOpenCart, onOpenSpecials }) {
             <span className="text-cream/40">•</span>
             <span className="text-cream/70 text-xs">{weatherTagline}</span>
           </div>
-
-          {/* Inline Stats Row */}
-          <HeroStats align="left" variant="strip" />
         </div>
 
         {/* Right: Dish Caption Chip + Story Progress Bar */}
@@ -243,7 +238,6 @@ export default function Hero({ onOpenCart, onOpenSpecials }) {
             prefersReducedMotion={prefersReducedMotion}
             isMobile={true}
             includeWeather={true}
-            includeStats={true}
           />
 
           {/* Progress Indicator for Tablet/Mobile screens */}

@@ -5,16 +5,15 @@ import { heroContent, heroSettings } from './heroConfig';
 
 import HeroHeadline from './HeroHeadline';
 import HeroCTAs from './HeroCTAs';
-import HeroStats from './HeroStats';
 
 /**
  * HeroContent Component
  * 
  * Renders the hero text and action block.
  * When overlaid on desktop (>= 1100px):
- *   Renders ONLY Logo + Lunch Pill + Headline + CTAs (weather & stats moved to info strip below).
+ *   Renders ONLY Logo + Lunch Pill + Headline + CTAs (weather moved to info strip below).
  * When below 1100px:
- *   Renders full stack including weather chip and stats row on solid bg-charcoal.
+ *   Renders stack including weather chip on solid bg-charcoal.
  */
 export default function HeroContent({
   onOpenSpecials,
@@ -22,7 +21,6 @@ export default function HeroContent({
   prefersReducedMotion,
   isMobile,
   includeWeather = true,
-  includeStats = true,
 }) {
   const { logo, lunchPill } = heroContent;
   const isLeft = heroSettings.TEXT_ALIGN === 'left';
@@ -133,9 +131,6 @@ export default function HeroContent({
       >
         <HeroCTAs align={heroSettings.TEXT_ALIGN} />
       </motion.div>
-
-      {/* Step 6: Optional Stats Row (only shown when stacked below 1100px) */}
-      {includeStats && <HeroStats align={heroSettings.TEXT_ALIGN} variant="grid" />}
     </div>
   );
 }
