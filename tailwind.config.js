@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        overlay: '1100px',
+      },
       colors: {
         charcoal: {
           DEFAULT: '#17110d',

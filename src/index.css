@@ -307,3 +307,60 @@ html.lenis, html.lenis body {
   color: var(--card-input-text) !important;
 }
 
+/* ========================================================
+   HERO FULL-WIDTH RESPONSIVE LAYOUT (NO HEIGHT INCREASE)
+   ======================================================== */
+.hero-video-box {
+  width: 100%;
+  height: min(var(--hero-vh, 100svh), 56.25vw);
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+@media (min-width: 1100px) {
+  .hero-desktop-overlay {
+    display: flex !important;
+    position: absolute !important;
+    left: clamp(28px, 4.5vw, 72px) !important;
+    bottom: clamp(28px, 5svh, 56px) !important;
+    top: auto !important;
+    transform: none !important;
+    width: min(42vw, 580px) !important;
+    max-width: min(42vw, 580px) !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    pointer-events: none !important;
+    z-index: 20 !important;
+  }
+  .hero-edge-fade {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .hero-desktop-strip {
+    display: flex !important;
+  }
+  .hero-mobile-stacked {
+    display: none !important;
+  }
+  .hero-mobile-caption {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1099.98px) {
+  .hero-desktop-overlay {
+    display: none !important;
+  }
+  .hero-desktop-strip {
+    display: none !important;
+  }
+  .hero-mobile-stacked {
+    display: flex !important;
+  }
+  .hero-mobile-caption {
+    display: block !important;
+  }
+}
+

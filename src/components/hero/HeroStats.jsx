@@ -1,21 +1,27 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { heroContent, heroSettings } from './heroConfig';
 
 /**
- * TUNABLE CONFIGURATION
- * -------------------------------------------------------------
- * COUNTUP_DURATION: Duration for number counter in milliseconds
- * STAGGER_DELAY: Delay between individual stat column entrances
+ * HeroStats Component
+ * Highlighting Homers' key value propositions with a count-up animation for years in business.
+ * Supports:
+ * - variant="strip": Slim inline presentation for the 72-96px desktop info strip below video.
+ * - variant="grid": 3-column grid for stacked mobile/tablet viewports below 1100px.
  */
 export const STATS_CONFIG = {
   countupDuration: 1500,
-  staggerDelay: 0.15,
+  staggerDelay: 0.12,
 };
 
-export default function HeroStats() {
+export default function HeroStats({ align = 'left', variant = 'grid' }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   const [yearsCount, setYearsCount] = useState(0);
+
+  const stats = heroContent.stats;
+  const isLeft = align === 'left';
+  const isStrip = variant === 'strip';
 
   useEffect(() => {
     if (!isInView) return;
@@ -33,7 +39,6 @@ export default function HeroStats() {
     const step = (timestamp) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / STATS_CONFIG.countupDuration, 1);
-      // easeOutExpo for energetic deceleration
       const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       setYearsCount(Math.round(eased * target));
 
@@ -48,47 +53,70 @@ export default function HeroStats() {
     };
   }, [isInView]);
 
-  const stats = [
-    {
-      title: 'Flame-Grilled',
-      subtitle: 'Premium Angus Patties',
-    },
-    {
-      title: 'Fresh Daily',
-      subtitle: 'Crumbed Fish & Salads',
-      hasBorder: true,
-    },
-    {
-      title: `${yearsCount}+ Years`,
-      subtitle: 'Family-Run in Emerton',
-    },
-  ];
+  if (isStrip) {
+    return (
+      <div
+        ref={ref}
+        className="flex items-center gap-4 lg:gap-6 text-cream/90 text-xs sm:text-sm"
+      >
+        {stats.map((stat, idx) => {
+          const titleText =
+            stat.countUpTarget !== undefined ? `${yearsCount}${stat.suffix || '+'}` : stat.title;
+
+          return (
+            <div key={idx} className="flex items-center gap-4 lg:gap-6">
+              <div className="flex flex-col items-start leading-tight">
+                <span className="text-cream font-bold text-xs sm:text-sm tracking-tight">
+                  {titleText}
+                </span>
+                <span className="text-cream/60 text-[10px] sm:text-[11px]">
+                  {stat.subtitle}
+                </span>
+              </div>
+              {idx < stats.length - 1 && (
+                <div className="h-6 w-[1px] bg-cream/15" aria-hidden="true" />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div
       ref={ref}
-      className="grid grid-cols-3 gap-3 sm:gap-8 mt-12 pt-8 border-t border-cream/10 text-cream/70 text-xs sm:text-sm w-full max-w-2xl"
+      className={`grid grid-cols-3 gap-2 sm:gap-6 mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-cream/15 text-cream/80 text-xs sm:text-sm w-full ${
+        isLeft ? 'max-w-xl' : 'max-w-2xl mx-auto'
+      }`}
     >
-      {stats.map((stat, idx) => (
-        <motion.div
-          key={idx}
-          className={`flex flex-col items-center text-center ${stat.hasBorder ? 'border-x border-cream/10 px-2' : ''}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{
-            duration: 0.6,
-            delay: 0.6 + idx * STATS_CONFIG.staggerDelay,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-          <span className="text-cream font-bold text-base sm:text-xl tracking-tight">
-            {stat.title}
-          </span>
-          <span className="text-cream/60 text-[11px] sm:text-xs mt-0.5">
-            {stat.subtitle}
-          </span>
-        </motion.div>
-      ))}
+      {stats.map((stat, idx) => {
+        const titleText =
+          stat.countUpTarget !== undefined ? `${yearsCount}${stat.suffix || '+'}` : stat.title;
+
+        return (
+          <motion.div
+            key={idx}
+            className={`flex flex-col ${isLeft ? 'items-start text-left' : 'items-center text-center'} ${
+              stat.hasBorder ? 'border-x border-cream/15 px-2 sm:px-4' : ''
+            }`}
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{
+              duration: 0.5,
+              delay: 0.2 + idx * STATS_CONFIG.staggerDelay,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          >
+            <span className="text-cream font-bold text-sm sm:text-lg md:text-xl tracking-tight">
+              {titleText}
+            </span>
+            <span className="text-cream/70 text-[10px] sm:text-xs mt-0.5 leading-snug">
+              {stat.subtitle}
+            </span>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
